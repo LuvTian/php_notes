@@ -1,3 +1,8 @@
+
+
+
+
+
 <?php
 /**
  * @authors Rehack (565195693@qq.com)
@@ -5,6 +10,9 @@
  * @version $Id$
  */
 
+
+
+session_start();
 
 // 登录
 $uname=$_POST['uname'];
@@ -33,10 +41,13 @@ $num=$con->affected_rows;//查询结果所影响的行数
 if($num){//$num>0 说明查询到了，也就是用户存在
     $row=$result->fetch_array();//遍历结果集，返回数组
     if($upass===$row['password']){//用户输入的密码与数据库的密码进行对比
-        echo "登录成功";
-        header("location:index.php");
+        // echo "登录成功";
+        // header("location:index.php");
+        $_SESSION['uname']=$uname;
+        $_SESSION['upass']=$upass;
+        echo json_encode($row);
     }else{
-        echo "密码错误";
+        exit("密码错误");
         echo "<a href='login.html'>返回登陆页面</a>";
     }
 }else{
@@ -47,3 +58,6 @@ $result->free();//释放结果集
 $con->close();//关闭数据库连接
 
 ?>
+
+
+

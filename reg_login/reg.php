@@ -28,7 +28,18 @@ if ($con->connect_error) {
 $con->query("SET NAMES $cfg_db_language");//设置数据库编码集
 
 $insert_sql="insert into  sk_users (username,password) values ('{$uname}','{$upass}')";//定义插入sql语句
-$con->query($insert_sql);//执行插入sql语句
+$select_sql="select * from sk_users where username='{$uname}'";
+
+$result=$con->query($select_sql);//执行查询sql 返回结果集
+$arr=$result->fetch_array();//遍历结果集返回数组
+// echo "<pre>";
+// print_r($arr);
+if($arr){
+    // echo $result;
+    echo json_encode($arr);//将数组转换成json
+}else{
+    $row=$con->query($insert_sql);//执行插入sql语句
+}
 
 $con->close();//关闭数据库连接
 

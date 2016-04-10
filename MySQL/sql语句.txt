@@ -10,3 +10,27 @@ delete from table_name where id >= 20;
 4.修改语句
 update table_name set mobile_num = '13540025225' WHERE name = 'Wilson';
 
+5.复制备份语句
+select * into test from sk_patient_copy where 1=2;（mysql不支持这种语句）
+create table new_table_name (select * from old_table_name where 1=2); //1=2表示只复制表结构不复制数据 where 1=1 相当于没有条件，所有的都符合
+
+----------------------------------------------------------------------------------------------
+sql对列的操作：
+
+1. 查看表字段
+desc 表名
+
+2. 添加列
+alter table 表名 add column 列名 varchar(30);
+
+3. 删除指定列
+alter table 表名 drop column 列名;
+
+----------------------------------------------------------------------------------------------
+sql函数：
+
+1.返回匹配的记录数
+count();
+count(*)是对行数目进行计数
+count(列名)是对列中不为空的行进行计数
+select count(字段名) as c from 表名 where age=16;

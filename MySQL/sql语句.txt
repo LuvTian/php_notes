@@ -1,0 +1,12 @@
+1.查询语句
+select * from table_name where id = id;
+
+2.插入语句
+insert into table_name (字段1,字段2...) values (值1,值2...)
+
+3.删除语句
+delete from table_name where id >= 20;
+
+4.修改语句
+update table_name set mobile_num = '13540025225' WHERE name = 'Wilson';
+

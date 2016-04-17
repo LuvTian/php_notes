@@ -26,5 +26,5 @@ if (!empty($uname) && !empty($upass)) {
 } else {
     echo "请输入用户名";
 }
-
+$result->free();//释放结果集
 $con->close(); //关闭数据库连接

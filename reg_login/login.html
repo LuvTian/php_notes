@@ -21,14 +21,15 @@
 
                 $.ajax({
                     // url: $('form').attr('action'), //这里是接收数据的PHP程序
-                    url: 'login2.php', //这里是接收数据的PHP程序
+                    url: 'login.php', //这里是接收数据的PHP程序
                     type: 'POST',
                     dataType: 'json',//从php返回的值以 JSON方式 解释
                     data: $('form').serialize(), //传给PHP的数据 表单序列化
                     success:function(data){
                         console.log(data);//object //对返回的数据处理
-                        console.log(data.uname);
-                        $('.result').text('登录成功！');
+                        if (data==1) {
+                            $('.result').text('登录成功！');
+                        }
                         // location.href='login.php';
                     },
                     error:function(){

@@ -9,18 +9,22 @@
     form{
         width: 30%;
         margin: 20px auto;
-        padding: 20px 0;
+        padding: 20px 20px;
         border:1px solid #ccc;
         border-radius:10px;
-        text-align: center;
+        /* text-align: center; */
     }
-    input{margin: 10px 0;}
+    input{margin: 10px 5px;}
+    .info,.info2{
+        font-size: 12px;
+        /* color: green; */
+    }
 </style>
 </head>
 <body>
-    <form action="reg.php" method="post">
+    <form>
         用户名：<input type="text" name="uname"><span class="info"></span><br>
-        密&emsp;码：<input type="password" name="upass"><br>
+        密&emsp;码：<input type="password" name="upass"><span class="info2"></span><br>
         <input type="submit" value="注册" id="submit">
         <p class="result"></p>
     </form>
@@ -32,52 +36,56 @@
         $(function(){
             // ajax验证用户名是否已经被注册
             $('input[name=uname]').blur(function() {
+                if($('input[name=uname]').val()==''){
+                    $('.info').html('请输入用户名');
+                    return false;
+                }
                 $.ajax({
-                    url: 'reg.php',
+                    url: 'check.php',
                     type: 'POST',
-                    dataType: 'JSON',
-                    data: {uname: $('input[name=uname]').val()}
+                    data: $('form').serialize()
+
                 })
                 .done(function(data) {
                     // console.log(data);
-                    if(data!=null){
-                        $('.info').text(data.username+'已经被注册')
+                    if(data==1){
+                        $('.info').html('此用户名已经被注册').css('color','red');
                     }else{
-                        $('.info').text('此用户名可用');
-
+                        $('.info').html('此用户名可用').css('color','green');
                     }
-                    return false;
+
                 })
                 .fail(function(data) {
                     alert('查询失败');
                 });
 
-                return false;
             });
 
 
             // ajax注册
             $('#submit').on('click',function(){
-                if($('input[name=uname]').val()==''){
-                    alert('请输入用户名');
+                if($('input[name=uname]').val().length<4){
+                    $('.info').html('请输入4位以上的用户名').css('color','red');
                     return false;
-                }else if ($('input[name=upass]').val()=='') {
-                    alert('请输入密码');
+                }else if ($('input[name=upass]').val().length<6) {
+                    $('.info2').html('请输入6位以上的密码').css('color','red');
                     return false;
                 }
                 $.ajax({
                     url: 'reg.php',
                     type: 'POST',
-                    dataType: 'JSON',
-                    data: $('form').serialize(),
+                    // dataType: 'JSON',
+                    data: $('form').serialize()
                 })
-                .done(function() {
-                    $('.result').text('注册成功！')
+                .done(function(data) {
+                    // alert(2)
+                    $('.result').html(data);
+                    $('input:not([type=submit])').val('');
+                    $('span').html('');
                 })
                 .fail(function() {
                     console.log("error");
                 });
-
                 return false;
 
             })

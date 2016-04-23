@@ -26,24 +26,23 @@
 <script src="http://libs.baidu.com/jquery/1.8.3/jquery.min.js"></script>
 <script>
     $(function(){
-
         $('#search').on('click',function(){
             $('.table').html('');
             if($('.search').val()==''){
                 alert("请输入搜索词");
                 return false;
-            }
+            }else{
+                $('.table').html('正在搜索中，请稍后...');
+                $.ajax({
+                    url: 'search.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        search:$('.search').val() //把表单数据以post方式传给后台
+                    }
 
-            $.ajax({
-                url: 'search.php',
-                type: 'POST',
-                dataType: 'json',
-                data: {
-                    search:$('.search').val() //把表单数据以post方式传给后台
-                }
-
-            })
-            .done(function(data) {
+                })
+                .done(function(data) {
                     for(var a in data){
                         for(var b in data[a]){
                             if(isFinite(b)){ //后台传来的json数据没有经过处理，索引项和关联项重复，这里就判断一下，然后删除索引项
@@ -66,26 +65,24 @@
                     }
 
                     console.log(data);//返回处理后的json
-                    if(data){
-                        $('.table').append('<thead><tr><td>id</td><td>姓名</td><td>年龄</td><td>电话</td><td>描述</td></tr></thead>');
-                        $.each(data,function(i,item){//动态创建一个表格并把处理后的json数据添加到里面
-                            $('.table').append(
-                                "<tr><td>"+item.id+ "</td>" +
-                                "<td>"+item.name+ "</td>" +
-                                "<td>" + item.age+ "</td>" +
-                                "<td>" + item.tel + "</dt>" +
-                                "<td>" + item.note+ "</td></tr>"
-                            )
-                        })
-                    }else{
-                        $('.table').html("未查询到相关内容，请更换搜索词");
-                    }
+                    $('.table').html("");
+                    $('.table').append('<thead><tr><td>id</td><td>姓名</td><td>年龄</td><td>电话</td><td>描述</td></tr></thead>');
+                    $.each(data,function(i,item){//动态创建一个表格并把处理后的json数据添加到里面
+                        $('.table').append(
+                            "<tr><td>"+item.id+ "</td>" +
+                            "<td>"+item.name+ "</td>" +
+                            "<td>" + item.age+ "</td>" +
+                            "<td>" + item.tel + "</dt>" +
+                            "<td>" + item.note+ "</td></tr>"
+                        )
+                    })
 
-            })
-            .fail(function() {
-                alert("error");
-            });
-            return false;//阻止默认提交
+                })
+                .fail(function() {
+                    $('.table').html("未查询到相关内容，请更换搜索词");
+                });
+                return false;//阻止默认提交
+            }
         });
     })
 </script>

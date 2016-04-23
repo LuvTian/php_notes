@@ -4,7 +4,7 @@
 //数据库连接信息
 $cfg_dbhost = 'localhost';//主机
 $cfg_dbuser = 'root';//数据库用户名
-$cfg_dbpwd = '';//数据库用户密码
+$cfg_dbpwd = 'root';//数据库用户密码
 $cfg_dbname = 'test';//数据库
 $cfg_db_language = 'UTF8';
 

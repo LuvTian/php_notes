@@ -40,3 +40,122 @@ select count(字段名) as c from 表名 where age=16;
 2.group by 分组
 
 select age,count(name) from table_name group by age;
+
+
+----------------------------------------------------------------------------------------------
+笔记：
+一、数据库安装
+
+二、数据初始化和基本修改
+1、创建数据库
+Create database-name
+2、创建表
+ create table student(sno int primary key);
+3、说明：增加一个列
+ alter table student add sname varchar(10);
+4、插入数据
+ insert into student (sno,sname) values(10,'程子为');
+5、查询数据
+mysql> select * from student;
+6、修改数据（如果出现中文插入不了错误，使用set names  gbk;）
+ update student set sno=1 where sname='程子为';
+
+7、删除数据
+delete from student where sno=2;
+
+8、在某一行的指定列添加数据（更新和插入的区别）
+
+ alter table  student add sage int;
+ alter table  student add ssex varchar(5);
+
+ update student set sage=20,ssex='男' where sno=1;
+
+9.删除数据库(前提该数据库在不使用的情况下)
+drop database  <数据库名>;
+10.
+
+    查看列：desc 表名;
+    修改表名：alter table t_book rename to bbb;
+    添加列：alter table 表名 add column 列名 varchar(30);
+    删除列：alter table 表名 drop column 列名;
+    修改列名MySQL： alter table bbb change nnnnn hh int;
+
+
+三、查询条件
+
+（1）排序
+降序： select * from student order by sage desc;
+升序： select * from student order by sage asc;
+（2）求总数
+ select count（*） from student;
+ select count(*) from student where sage=20;
+（3）求和
+ select sum(sage) as age  from student;
+（4）求平均
+ select avg(sage) as 平均年龄  from student;
+（5）最大值
+ select max(sage) as 最大年龄  from student;
+（6）最小值
+ select min(sage) as 最大年龄  from student;
+（7）分组
+ select sage,count(*) from student group by sage;
+（8）多条件查询
+ select * from student where sname='小红' and sno=5;
+
+（9）多表查询
+ select * from student,course where student.sno=course.sno and student.sno=6;
+
+----------------------------------------------------------------------------------------------
+
+cmd下sql命令：
+1.连接服务器:在命令提示符下
+mysql -h localhost -uroot -p123456
+登录服务器时顺便选择一个数据库
+mysql db -h localhost -u root -p 123456
+2.修改密码:在命令提示符下
+mysqladmin -h localhost -u root -p 123456 password 新密码
+mysqladmin -uroot password yourpasswd 为root添加密码
+set password for root@localhost=password('yourpasswd');//登陆后改密码
+3.导出数据库:在命令提示符下
+mysqldump -u root -p123456 wenzhang > 1.sql
+mysqldump (-h localhost) -u root -p 123456 数据库名 表名> c:\2.sql
+4.导出数据库,只带结构:在命令提示符下
+mysqldump   -h localhost -u root -p 123456 数据库名 -d>c:\2.sql
+5.导入数据库:在命令提示符下
+mysql  -h localhost -u root -p 123456 数据库名< c:\2.sql
+6.创建数据库DB
+create database
+7.查看数据库
+show databases;
+8.删除数据库
+drop database 数据库名;
+9.选用数据库
+use 数据库名;
+10.查看当前正在使用的数据库
+select database();
+11.查看当前的日期和时间
+select now();
+12.查看当前的用户
+select user();
+13.查看当前的版本
+select version();
+14.查看数据表
+show tables;
+查看创建表的代码
+show create table 表名
+15.查看表结构
+describe  表名称  |  desc 表名称;
+SHOW FIELDS FROM
+16.给表添加一列
+alter table 表名 add 列名 属性;
+17.修改表的字段类型
+alter table 表名 modify 字段　新类型;
+18.修改表的字段名称
+alter table 表名 change 字段 新字段 类型;
+19.删除字段
+alter table 表名 drop 字段;
+20.修改表名
+alter table admin rename to admin1;
+REPAIR TABLE 修复表
+OPTIMIZE TABLE 优化表
+SHOW KEYS FROM

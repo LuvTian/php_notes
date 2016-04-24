@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>searchSuggest</title>
+<link href="css/searchSuggest.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<!-- <script type="text/javascript" src="js/searchSuggest.js"></script> -->
+</head>
+
+<body>
+<div id="searchSuggest">
+	<form action="search.php" method="post" id="suggest_form">
+		<input type="text" name="keywords" id="suggest_input" autocomplete="off"/>
+		<input type="submit" value="搜索一下" id="suggest_submit" />
+	</form>
+	<ul id="suggest_ul">
+	</ul>
+</div>
+    <script>
+        $(function(){
+            $('suggest_input').keyup(function(){
+                if($("#suggest_input").val().length==0){
+                    $("#suggest_ul").hide(0);
+                    return;
+                }
+                $.ajax({
+                    url:"search.php",
+                    type:"POST",
+                    datatype:"json",
+                    data:{
+                        keywords:$('#suggest_input').val()
+                    }
+                })
+                .done(function(data){
+                    console.log(data);
+                })
+                .fail(function(){
+                    console.log('错误')
+                })
+
+                // return false;
+            })
+
+        })
+    </script>
+</body>
+</html>

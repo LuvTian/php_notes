@@ -23,6 +23,7 @@ body{
 	padding:0px;
 	border:1px solid #ccc;
 	list-style-type:none;
+	display: none;
 }
 
 #suggest_ul li{

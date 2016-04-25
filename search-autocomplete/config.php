@@ -9,7 +9,7 @@ $cfg_dbhost='localhost';
 $cfg_dbuser='root';
 $cfg_dbpwd='root';
 $cfg_dbname='test';
-$cfg_language='UFT8';
+$cfg_language='UTF8';
 $cfg_dbprefix = '';//表前缀
 
 $con=new mysqli($cfg_dbhost,$cfg_dbuser,$cfg_dbpwd,$cfg_dbname);//连接数据库

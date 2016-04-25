@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <title>searchSuggest</title>
 <link href="css/searchSuggest.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<!-- <script type="text/javascript" src="js/searchSuggest.js"></script> -->
 </head>
 
 <body>
@@ -14,33 +14,50 @@
 		<input type="text" name="keywords" id="suggest_input" autocomplete="off"/>
 		<input type="submit" value="搜索一下" id="suggest_submit" />
 	</form>
-	<ul id="suggest_ul">
-	</ul>
+	<ul id="suggest_ul"></ul>
 </div>
     <script>
         $(function(){
-            $('suggest_input').keyup(function(){
+            $('#suggest_input').keyup(function(){
                 if($("#suggest_input").val().length==0){
                     $("#suggest_ul").hide(0);
                     return;
                 }
                 $.ajax({
                     url:"search.php",
+                    // url:"search2.php",
                     type:"POST",
-                    datatype:"json",
-                    data:{
-                        keywords:$('#suggest_input').val()
-                    }
+                    dataType:"json",
+                    data:$('form').serialize()
                 })
                 .done(function(data){
+                    console.log(typeof(data));//object
                     console.log(data);
+                    var contents='';
+                    for(var k in data){
+                        contents+="<li>"+data[k][0]+"</li>";
+                        // contents+="<li>"+data[k]['title']+"</li>";
+                    }
+                    $("#suggest_ul").html(contents);
+                    $("#suggest_ul").show(5);
                 })
                 .fail(function(){
                     console.log('错误')
                 })
 
-                // return false;
+                // return false;//阻止默认提交
             })
+
+
+            //按下按键后300毫秒显示下拉提示
+            $("#suggest_input").keyup(function(){
+                setInterval(changehover,300);
+                function changehover(){
+                    $("#suggest_ul li").hover(function(){ $(this).css("background","#eee");},function(){ $(this).css("background","#fff");});
+                    $("#suggest_ul li").click(function(){ $("#suggest_input").val($(this).html());$("#suggest_ul").hide(0);});
+                    // $("#suggest_ul li").click(function(){ $("#suggest_form").submit();});//用户选中匹配项后进行数据处理
+                }
+            });
 
         })
     </script>

@@ -11,19 +11,17 @@ $keywords=$_POST['keywords'];
 // echo $keywords;
 // $keywords='php';
 
-$search_sql="select title from ".$cfg_dbprefix."article where title like '%".$keywords."%' order by click desc limit 0,9;";
+$search_sql="select * from ".$cfg_dbprefix."article where title like '%".$keywords."%' order by click desc limit 0,9;";
 //echo $search_sql."<br>";
 
 $results=$con->query($search_sql);//执行sql查询语句，返回结果集
 
-$i=0;
 $arr=array();
-while($row = $results->fetch_array())
+while($row = $results->fetch_assoc())
 {
-    $i++;
-    $arr[$i]['title'] = $row['title'];
-    // $arr[$i]['click'] = $row['click'];
+    $arr[]=$row;
 }
+
 
 //关闭资源
 $results->free();

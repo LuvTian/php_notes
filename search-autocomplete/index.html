@@ -24,7 +24,7 @@
                     return;
                 }
                 $.ajax({
-                    url:"search.php",
+                    url:"search3.php",
                     // url:"search2.php",
                     type:"POST",
                     dataType:"json",
@@ -35,8 +35,8 @@
                     console.log(data);
                     var contents='';
                     for(var k in data){
-                        contents+="<li>"+data[k][0]+"</li>";
-                        // contents+="<li>"+data[k]['title']+"</li>";
+                        // contents+="<li>"+data[k][0]+"</li>";
+                        contents+="<li>"+data[k]['title']+"</li>";
                     }
                     $("#suggest_ul").html(contents);
                     $("#suggest_ul").show(5);

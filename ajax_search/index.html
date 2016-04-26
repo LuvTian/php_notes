@@ -43,8 +43,6 @@
                     type: 'POST',
                     dataType: 'json',
                     data:$('form').serialize() //把表单数据以post方式传给后台
-
-
                 })
                 .done(function(data) {
                     /*for(var a in data){
@@ -54,7 +52,7 @@
                             }
                         }
 
-                    }*/ //这里不需要再进行处理，因为在后台已经用fetch_assoc函数进行处理过
+                    }*/ //这里不需要再对json对象进行处理，因为在后台已经用fetch_assoc函数进行处理过
 
                     console.log(data);//返回处理后的json
                     $('.table').html("");

@@ -15,11 +15,11 @@
 </style>
 </head>
 <body>
-<form>
-    <input type="text" name="search" placeholder="测试搜索词：世纪城、租房、考虑" class="search">
-    <select name="" id="">
-        <option value="">关键词</option>
-        <option value="">手机号</option>
+<form action="search.php" method="post">
+    <input type="text" name="keywords" placeholder="测试搜索词：世纪城、租房、考虑" class="search">
+    <select name="searchtype" id="">
+        <option value="note">关键词</option>
+        <option value="tel">手机号</option>
     </select>
 
     <input type="submit" id="search" value="搜索">
@@ -42,32 +42,19 @@
                     url: 'search.php',
                     type: 'POST',
                     dataType: 'json',
-                    data: {
-                        search:$('.search').val() //把表单数据以post方式传给后台
-                    }
+                    data:$('form').serialize() //把表单数据以post方式传给后台
+
 
                 })
                 .done(function(data) {
-                    for(var a in data){
+                    /*for(var a in data){
                         for(var b in data[a]){
                             if(isFinite(b)){ //后台传来的json数据没有经过处理，索引项和关联项重复，这里就判断一下，然后删除索引项
                                 delete data[a][b];
                             }
                         }
-                        /*document.write("<td style='border:1px solid blue;font-size:13px;padding:0 5px'>");
-                        document.write(data[a]['name']);
-                        document.write("</td>");
-                        document.write("<td style='border:1px solid blue;font-size:13px;padding:0 5px'>");
-                        document.write(data[a]['age']);
-                        document.write("</td>");
-                        document.write("<td style='border:1px solid blue;font-size:13px;padding:0 5px'>");
-                        document.write(data[a]['tel']);
-                        document.write("</td>");
-                        document.write("<td style='border:1px solid blue;font-size:13px;padding:0 5px'>");
-                        document.write(data[a]['note']);
-                        document.write("</td>");*/
 
-                    }
+                    }*/ //这里不需要再进行处理，因为在后台已经用fetch_assoc函数进行处理过
 
                     console.log(data);//返回处理后的json
                     $('.table').html("");

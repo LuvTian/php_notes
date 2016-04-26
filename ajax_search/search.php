@@ -10,9 +10,13 @@ require_once 'config.php';
 
 
 
-$search=$_POST['search'];
+$keywords=$_POST['keywords'];
+$searchtype=$_POST['searchtype'];
+// echo $searchtype;
+
+
 // $search='房';
-$searchSql="select * from data where note like '%{$search}%'";
+$searchSql="select * from data where {$searchtype} like '%{$keywords}%'";
 
 $searchResult=$con->query($searchSql);
 
@@ -20,10 +24,10 @@ while($row=$searchResult->fetch_assoc()){//从结果集中取出每一行进行�
     // var_dump($row);
     $arr[]=$row;
 }
-/*echo "<pre>";
-print_r($arr);
-die;*/
-if($search){
+// echo "<pre>";
+// print_r($arr);
+// die;
+if($keywords){
     echo json_encode($arr,JSON_UNESCAPED_UNICODE);
 }
 

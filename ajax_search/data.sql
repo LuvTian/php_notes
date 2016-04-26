@@ -21,23 +21,23 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `data`;
 CREATE TABLE `data` (
   `id` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(50) CHARACTER SET gbk NOT NULL,
+  `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   `sex` tinyint(2) NOT NULL,
   `age` int(11) NOT NULL,
-  `tel` varchar(50) CHARACTER SET gbk NOT NULL,
-  `region` varchar(100) CHARACTER SET gbk NOT NULL,
+  `tel` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `region` varchar(100) CHARACTER SET utf8 NOT NULL,
   `uid` int(11) NOT NULL,
-  `questions` varchar(250) CHARACTER SET gbk NOT NULL,
+  `questions` varchar(250) CHARACTER SET utf8 NOT NULL,
   `diseaseid` int(11) NOT NULL,
   `channelid` int(11) NOT NULL,
-  `keyword` varchar(250) CHARACTER SET gbk NOT NULL,
+  `keyword` varchar(250) CHARACTER SET utf8 NOT NULL,
   `expertid` int(11) NOT NULL,
-  `fromweb` varchar(250) CHARACTER SET gbk NOT NULL,
+  `fromweb` varchar(250) CHARACTER SET utf8 NOT NULL,
   `ordertime` int(11) NOT NULL,
   `status` tinyint(4) NOT NULL,
-  `note` varchar(250) CHARACTER SET gbk NOT NULL,
-  `revisitinfo` text CHARACTER SET gbk NOT NULL,
-  `chatinfo` text CHARACTER SET gbk NOT NULL,
+  `note` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `revisitinfo` text CHARACTER SET utf8 NOT NULL,
+  `chatinfo` text CHARACTER SET utf8 NOT NULL,
   `addtime` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

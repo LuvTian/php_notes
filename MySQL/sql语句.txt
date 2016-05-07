@@ -28,6 +28,8 @@ alter table 表名 add column 列名 varchar(30);
 3. 删除指定列
 alter table 表名 drop column 列名;
 
+4. 复制列
+update table_name set col2=col1;//把字段col1里面的内容复制给col2,得到col1和col2两列的内容一样。
 ----------------------------------------------------------------------------------------------
 sql函数：
 

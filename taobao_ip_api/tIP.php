@@ -5,6 +5,12 @@
  * @date    2016-05-24 09:37:26
  * @version $Id$
  */
+
+/**
+ * 调用淘宝ip地址库API接口
+ * 访问限制：为了保障服务正常运行，每个用户的访问频率需小于10qps。
+ * 详细请参看API主页：http://ip.taobao.com/
+ */
 header("Content-Type:text/html;charset=utf-8");
 
 function getCity($ip){

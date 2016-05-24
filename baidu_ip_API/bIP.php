@@ -5,11 +5,12 @@
  * @date    2016-05-24 09:37:26
  * @version $Id$
  */
-
+/**
+ * 调用百度ip库API接口，返回json数据
+ * http://apistore.baidu.com/apiworks/servicedetail/114.html
+ */
 header("Content-Type:text/html;charset=utf-8");
 
-
-// 调用百度ip库API接口，返回json数据
 function getCity($ip){
     $ch = curl_init();
     $url = 'http://apis.baidu.com/apistore/iplookupservice/iplookup?ip='.$ip;

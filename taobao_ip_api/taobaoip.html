@@ -24,7 +24,7 @@
                 if(data.code=='0'){
                     $("#ip").html("您的IP是:"+data.data.ip+" 来自:"+data.data.country+" "+data.data.city+" "+data.data.isp);
                 }else {
-                    $("#ip").html('未知IP');
+                    $("#ip").html('无效的IP地址');
                 }
            })
            .fail(function(){

@@ -6,7 +6,7 @@
  * @version $Id$
  */
 /**
- * 调用百度ip库API接口，返回json数据
+ * 调用百度ip地址查询接口，返回json数据
  * http://apistore.baidu.com/apiworks/servicedetail/114.html
  */
 header("Content-Type:text/html;charset=utf-8");

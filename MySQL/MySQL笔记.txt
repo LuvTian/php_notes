@@ -1,10 +1,10 @@
-1.创建数据库：
+1、创建数据库：
 CREATE DATABASE dataname;
 
 查看所有数据库列表；
 SHOW DATABASES;
 
-2.创建数据表：
+2、创建数据表：
 CREATE TABLE [IF NOT EXISTS] table_name(
     column_name data_type NOT NULL,
     username VARCHAR(20),
@@ -16,17 +16,27 @@ data_type是数据类型,
 NOT NULL是该字段属性，表示该字段值不允许为空，字段的默认属性是NULL可以省略不写
 每行后面以逗号结尾，最后一行不需要逗号
 
-查看当前位于哪个数据库下：
+3、查看当前位于哪个数据库下：
 SELECT DATABASE();
 
-查看当前数据库的数据表：
+
+4、查看当前数据库的数据表：
 SHOW TABLES;
 查看指定数据库的数据表：
 SHOW TABLES FROM db_name;
 
-查看某数据表结构：
+5、查看某数据表结构：
 SHOW COLUMNS FROM table_name;
 
-插入记录，增加行数据：
+6、插入记录，增加行数据：
 INSERT [INTO] table_name [(column_name,...)] VALUE(val,...);
 如果column_name省略，那么必须给所有的字段都赋值，不管怎么样字段名和其值必须对应。
+
+7、主键：PRIMARY KEY
+主键约束
+每张数据表只能存在一个主键
+主键可以保证记录的唯一性
+主键自动为NOT NULL
+
+8、自动编号：AUTO_INCREMENT
+必须与主键组合使用

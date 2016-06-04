@@ -32,11 +32,42 @@ SHOW COLUMNS FROM table_name;
 INSERT [INTO] table_name [(column_name,...)] VALUE(val,...);
 如果column_name省略，那么必须给所有的字段都赋值，不管怎么样字段名和其值必须对应。
 
-7、主键：PRIMARY KEY
+
+
+7、自动编号：AUTO_INCREMENT
+必须与主键组合使用,起始值为1
+主键不一定必须和自动编号一起使用
+为自动编号的字段在插入记录的时候不需要进行赋值
+如果没有自动编号属性的主键字段是可以赋值的，但不能重复
+
+8、主键：PRIMARY KEY
 主键约束
 每张数据表只能存在一个主键
 主键可以保证记录的唯一性
 主键自动为NOT NULL
 
-8、自动编号：AUTO_INCREMENT
-必须与主键组合使用
+CREATE TABLE table_name(
+id SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(30) NOT NULL
+);
+
+9、唯一约束：UNIQUE KEY
+唯一约束
+唯一约束可以保证记录的唯一性
+唯一约束的字段可以为空值(NULL)  NULL != NULL
+每张数据表可以存在多个唯一约束
+
+10、字段默认值 DEFAULT
+当插入记录时，如果没有明确为字段赋值，则自动赋予默认值
+demo:
+CREATE TABLE tb6(
+id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(20) NOT NULL UNIQUE KEY,
+sex ENUM ('1','2','3') DEFAULT '3'
+);
+INSERT tb6 (username) VALUES('Tom'); 插入一条记录，不设置sex的值
+SELECT * FROM tb6; 可以发现上面这条记录的sex字段有默认值3
+
+11、查询记录
+SELECT * FROM table_name;
+

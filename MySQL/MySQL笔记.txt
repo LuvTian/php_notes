@@ -8,7 +8,7 @@ sql语句必须以分号结束
 
 修改数据库配置文件my.cnf
 default-character-set = utf8 修改数据库默认编码
-default_storage_engine = InnoDB 修改数据库引擎
+default_storage_engine = InnoDB 修改数据表存储引擎
 --------------------------------------------------------------------
 约束：
 约束保证数据的完整性和一致性
@@ -81,6 +81,22 @@ INSERT [INTO] table_name [(column_name,...)] VALUE(val,...);
 为自动编号的字段在插入记录的时候不需要进行赋值
 如果没有自动编号属性的主键字段是可以赋值的，但不能重复
 
+
+----------------------------------------------------------------------------
+约束：
+
+约束分为表级约束和列级约束
+
+对一个数据列建立的约束（只约束一个字段）叫做列级约束，既可以在列定义时声明，也可以在列定义后声明，实际操作用列级约束用的多
+对多个数据列建立的约束（约束两个或以上的约束）叫做表级约束，只能在列定义后声明
+
+约束按功能可分类为：
+NOT NULL(非空约束)
+PRIMARY KEY(主键约束)
+UNIQUE KEY(唯一约束)
+DEFAULT(默认约束)
+FOREIGN KEY(外键约束)
+
 8、主键：PRIMARY KEY
 主键约束
 每张数据表只能存在一个主键
@@ -116,10 +132,24 @@ SELECT * FROM tb6; 可以发现上面这条记录的sex字段有默认值3
 保持数据的一致性、完整性
 实现一对一或一对多关系
 外键约束的要求：
-父表和子表必须使用相同的存储引擎，而且禁止使用临时表。
+父表(子表所参照的表)和子表(具有外键列的表)必须使用相同的存储引擎，而且禁止使用临时表。
 数据表的存储引擎只能为InnoDB。在MySQL配置文件里配置default-storage-engine=INNODB
-外键列和参照列必须具有相似的数据类型。其中数字的长度或是否有符号位必须相同；而字符的长度则可以不同。
+外键列(加了FOREIGN关键字的列)和参照列(外键列所参照的列)必须具有相似的数据类型。其中数字的长度或是否有符号位必须相同；而字符的长度则可以不同。
 外键列和参照列必须创建索引。如果外键列不存在索引的话，MySQL将自动创建索引。
+
+CREATE TABLE provinces( -->父表
+id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT, -->参照列
+pname VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE users( -->子表
+id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(20) NOT NULL,
+pid SMALLINT UNSIGNED, -->外键列
+FOREIGN KEY (pid) REFERENCES provinces (id)
+);
+
+----------------------------------------------------------------------------
 
 
 12、查询记录

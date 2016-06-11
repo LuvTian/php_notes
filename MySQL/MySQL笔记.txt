@@ -1,5 +1,14 @@
 基础知识：
 数据类型：字符型、整型、浮点型、日期时间型
+
+数据表中的行称之为记录，列称之为字段
+
+关键词与函数名称都要大写，数据库名称、表名称、字段名称都要小写
+sql语句必须以分号结束
+
+修改数据库配置文件my.cnf
+default-character-set = utf8 修改数据库默认编码
+default_storage_engine = InnoDB 修改数据库引擎
 --------------------------------------------------------------------
 约束：
 约束保证数据的完整性和一致性
@@ -10,18 +19,28 @@
     UNIQUE KEY (唯一约束)
     DEFAULT (默认约束)
     FOREEIGN KEY (外键约束)
+
+
+
+
 --------------------------------------------------------------------
 
 
-1、创建数据库：
+1、创建、修改、删除数据库：
 CREATE DATABASE database_name;
+CREATE DATABASE database_name CHARACTER SET utf8; 创建指定编码的数据库
+
+ALTER DATABASE db_name CHARACTER SET gbk; 修改数据库的编码
+
 
 查看所有数据库列表；
 SHOW DATABASES;
 
 SHOW CREATE DATABASE database_name;
-查看所创建的数据库信息 包括数据库编码
+查看指定的数据库信息 包括数据库编码
 
+删除指定数据库
+DROP DATABASE db_name;
 
 2、创建数据表：
 CREATE TABLE [IF NOT EXISTS] table_name(

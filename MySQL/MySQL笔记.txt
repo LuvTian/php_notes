@@ -162,3 +162,15 @@ ls查看一下有没有生成databases.sql文件
 14、导入sql文件
 use db_name;
 source /www/xxx.sql
+
+----------------------------------------------------------------------------
+
+用户操作
+GRANT ALL PRIVILEGES ON database_name.* TO username@'%' IDENTIFIED BY 'password'; 指定某个数据库 添加或授权一个用户名为username，密码为password，授权为% （%表示所有ip能连接，可以设置指定ip或者localhost）
+
+
+GRANT ALL PRIVILEGES ON *.* TO rehack@'%' IDENTIFIED BY '198874' WITH GRANT OPTION; 让rehack用户从任何ip（主机）远程连接到mysql服务器，建议不要给root用户这样的权限，*.* 这里前面的*号表示所有的数据库，后面的*号表示所有的权限
+
+FLUSH PRIVILEGES; 刷新数据库权限
+
+select host,user from user; 查看mysql数据库用户

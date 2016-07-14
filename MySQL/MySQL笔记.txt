@@ -66,16 +66,16 @@ SHOW TABLES;
 查看指定数据库的数据表：
 SHOW TABLES FROM db_name;
 
-5、查看某数据表结构：
+5、查看某数据表结构（查看表的字段）：
 SHOW COLUMNS FROM table_name;
 
 6、插入记录，增加行数据：
 INSERT [INTO] table_name [(column_name,...)] VALUE(val,...);
-如果column_name省略，那么必须给所有的字段都赋值，不管怎么样字段名和其值必须对应。
+如果column_name省略，那么必须给所有的字段都赋值(如果有自增的字段比如id 其值可以赋为NULL或者DEFAULT)，不管字段名是否省略字段名和其值必须对应。
 
 
 
-7、自动编号：AUTO_INCREMENT
+7、自动编号(自增)：AUTO_INCREMENT
 必须与主键组合使用,起始值为1
 主键不一定必须和自动编号一起使用
 为自动编号的字段在插入记录的时候不需要进行赋值
@@ -174,3 +174,17 @@ GRANT ALL PRIVILEGES ON *.* TO rehack@'%' IDENTIFIED BY '198874' WITH GRANT OPTI
 FLUSH PRIVILEGES; 刷新数据库权限
 
 select host,user from user; 查看mysql数据库用户
+
+----------------------------------------------------------------------------
+修改表
+
+添加字段（列）：
+ALTER TABLE table_name ADD ziduan_name smallint unsigned;
+
+添加外键约束：ALTER TABLE users2 ADD FOREIGN KEY(pid) REFERENCES provinces (id);
+
+添加默认约束：ALTER TABLE users2 ALTER age SET DEFAULT 15;
+
+删除默认约束：ALTER TABLE users2 ALTER age DROP DEFAULT;
+
+数据表的修改操作：无非就是添加列，删除列，添加约束，删除约束。用的是ALTER，而INSERT是对数据表添加插入记录用的。

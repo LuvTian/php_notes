@@ -70,10 +70,18 @@ SHOW TABLES FROM db_name;
 SHOW COLUMNS FROM table_name;
 
 6、插入记录，增加行数据：
-INSERT [INTO] table_name [(column_name,...)] VALUE(val,...);
+INSERT [INTO] table_name [(column_name,...)] VALUES(val,...);
 如果column_name省略，那么必须给所有的字段都赋值(如果有自增的字段比如id 其值可以赋为NULL或者DEFAULT)，不管字段名是否省略字段名和其值必须对应。
+VALUES的值的类型可以是表达式，函数
+如果要同时插入多条记录VALUES后面的括号以逗号分隔
 
+第二种插入记录的方式
+INSERT [INTO] table_name SET colunm_name1="",colunm_name2=""...
+与第一种方式的区别在于，此方法可以使用子查询
 
+第三种插入记录的方式
+次方法可以将查询(SELECT)的结果插入到指定的数据表
+insert table_name [(colname...)] select.....
 
 7、自动编号(自增)：AUTO_INCREMENT
 必须与主键组合使用,起始值为1

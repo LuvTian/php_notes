@@ -69,6 +69,9 @@ SHOW TABLES FROM db_name;
 5、查看某数据表结构（查看表的字段）：
 SHOW COLUMNS FROM table_name;
 ------------------------------------------------------------------------------------------
+对记录的操作主要是增删改查：INSERT DELETE UPDATE SELECT
+增删改称为写 查称为读
+
 6、插入记录，增加行数据：
 INSERT [INTO] table_name [(column_name,...)] VALUES(val,...);
 如果column_name省略，那么必须给所有的字段都赋值(如果有自增的字段比如id 其值可以赋为NULL或者DEFAULT)，不管字段名是否省略字段名和其值必须对应。
@@ -82,7 +85,7 @@ INSERT [INTO] table_name SET colunm_name1="",colunm_name2=""...
 第三种插入记录的方式
 次方法可以将查询(SELECT)的结果插入到指定的数据表
 insert table_name [(colname...)] select.....
-
+INSERT test (username) SELECT username FROM users WHERE age>25; //从users表里取出数据插入到test表中，注意字段要对应
 
 修改更新记录UPDATE
 UPDATE users set age=age+5; 更新单列
@@ -101,6 +104,18 @@ SELECT id,username FROM usres; //查询指定字段(*号表示所有字段)（�
 等同于SELECT users.id,users.username FROM users;
 
 查询表达式
+SELECT username AS uname,password AS pwd FROM users; //别名查询，会影响查询结果集中的字段名
+
+对查询结果分组
+SELECT sex FROM users GROUP BY sex;
+
+对查询结果进行排序
+SELECT * FROM users ORDER BY age ASC; 按照年龄升序排序，默认是ASC DESC是降序
+
+限制查询结果所返回的数量 LIMIT
+SELECT * FROM users LIMIT 2; //返回两条记录
+SELECT * FROM users LIMIT 2,4; //从第2位开始(从0开始计算的) 返回4条记录
+
 
 
 

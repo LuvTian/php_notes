@@ -68,6 +68,7 @@ SHOW TABLES FROM db_name;
 
 5、查看某数据表结构（查看表的字段）：
 SHOW COLUMNS FROM table_name;
+或者  DESC table_name;
 ------------------------------------------------------------------------------------------
 对记录的操作主要是增删改查：INSERT DELETE UPDATE SELECT
 增删改称为写 查称为读
@@ -86,6 +87,7 @@ INSERT [INTO] table_name SET colunm_name1="",colunm_name2=""...
 次方法可以将查询(SELECT)的结果插入到指定的数据表
 insert table_name [(colname...)] select.....
 INSERT test (username) SELECT username FROM users WHERE age>25; //从users表里取出数据插入到test表中，注意字段要对应
+INSERT tdb_goods_cates (cate_name) SELECT goods_cate FROM tdb_goods GROUP BY goods_cate;//将子查询分类结果写入表中
 
 修改更新记录UPDATE
 UPDATE users set age=age+5; 更新单列
@@ -116,7 +118,12 @@ SELECT * FROM users ORDER BY age ASC; 按照年龄升序排序，默认是ASC DE
 SELECT * FROM users LIMIT 2; //返回两条记录
 SELECT * FROM users LIMIT 2,4; //从第2位开始(从0开始计算的) 返回4条记录
 
-
+子查询(subquery)
+子查询指嵌套在查询内部，且必须始终出现在圆括号内。
+子查询可以包含多个关键字或条件，如：DISTINCT / GROUP BY / ORDER BY / LIMIT / 函数等。
+子查询的外层查询可以是：SELECT, INSERT, UPDATE , SET 或DO
+子查询返回的结果可以是：标量、一行、一列或子查询
+SELECT goods_id,goods_name,goods_price FROM tdb_goods WHERE goods_price>=(SELECT ROUND(AVG(goods_price),2) FROM tdb_goods);
 
 
 ------------------------------------------------------------------------------------------

@@ -126,6 +126,16 @@ SELECT * FROM users LIMIT 2,4; //从第2位开始(从0开始计算的) 返回4�
 SELECT goods_id,goods_name,goods_price FROM tdb_goods WHERE goods_price>=(SELECT ROUND(AVG(goods_price),2) FROM tdb_goods);
 
 
+多表更新
+CREATE .. SELECT ..
+创建表的同时把其他表的内容插入进来：
+CREATE TABLE tdb_goods_brands(
+brand_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+brand_name VARCHAR(40) NOT NULL)
+SELECT brand_name FROM tdb_goods GROUP BY brand_name;
+
+UPDATE tdb_goods INNER JOIN tdb_goods_brands ON tdb_goods.brand_name=tdb_goods_brands.brand_name SET tdb_goods.brand_name=tdb_goods_brands.brand_id;
+
 ------------------------------------------------------------------------------------------
 
 7、自动编号(自增)：AUTO_INCREMENT

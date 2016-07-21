@@ -126,7 +126,7 @@ SELECT * FROM users LIMIT 2,4; //从第2位开始(从0开始计算的) 返回4�
 SELECT goods_id,goods_name,goods_price FROM tdb_goods WHERE goods_price>=(SELECT ROUND(AVG(goods_price),2) FROM tdb_goods);
 
 
-多表更新
+
 CREATE .. SELECT ..
 创建表的同时把其他表的内容插入进来：
 CREATE TABLE tdb_goods_brands(
@@ -134,7 +134,16 @@ brand_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 brand_name VARCHAR(40) NOT NULL)
 SELECT brand_name FROM tdb_goods GROUP BY brand_name;
 
+更新多表
 UPDATE tdb_goods INNER JOIN tdb_goods_brands ON tdb_goods.brand_name=tdb_goods_brands.brand_name SET tdb_goods.brand_name=tdb_goods_brands.brand_id;
+
+修改表的多个字段和字段属性
+ALTER TABLE tdb_goods CHANGE goods_cate cate_id SMALLINT UNSIGNED NOT NULL,CHANGE brand_name brand_id SMALLINT UNSIGNED NOT NULL;
+
+表连接
+内连接 .. INSER JOIN .. ON
+左外连接 .. LEFT JOIN .. ON
+右外连接 .. RIGHT JOIN .. ON
 
 ------------------------------------------------------------------------------------------
 

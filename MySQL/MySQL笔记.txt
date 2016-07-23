@@ -245,7 +245,7 @@ GRANT ALL PRIVILEGES ON *.* TO rehack@'%' IDENTIFIED BY '198874' WITH GRANT OPTI
 
 FLUSH PRIVILEGES; 刷新数据库权限
 
-select host,user from user; 查看mysql数据库用户
+SELECT host,user,password FROM user; 查看mysql数据库用户
 
 ----------------------------------------------------------------------------
 修改表

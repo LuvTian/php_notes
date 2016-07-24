@@ -260,3 +260,10 @@ ALTER TABLE table_name ADD ziduan_name smallint unsigned;
 删除默认约束：ALTER TABLE users2 ALTER age DROP DEFAULT;
 
 数据表的修改操作：无非就是添加列，删除列，添加约束，删除约束。用的是ALTER，而INSERT是对数据表添加插入记录用的。
+
+
+----------------------------------------------------------------------------
+字符函数
+字符连接    SELECT CONCAT(first_name,last_name) AS fullname FROM user;
+指定分隔符的字符连接  SELECT CONCAT('-','A','B','C'); => A-B-C
+模式匹配 [NOT] LIKE  %代表任意个字符 _代表任意一个字符

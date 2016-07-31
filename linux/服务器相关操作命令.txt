@@ -3,3 +3,5 @@ nginx -t -c /usr/local/nginx/conf/mynginx.conf 检测指定的nginx配置文件
 nginx -v：显示 nginx 版本号。
 nginx -V：显示 nginx 的版本号以及编译环境信息以及编译时的参数。
 nginx -s reload 平滑重启nginx
+
+vi /usr/local/nginx/conf/mime.types 编辑mime配置

@@ -33,14 +33,6 @@ ps -aux | grep nginx 查看nginx的所有运行进程和状态
 查看到之后，通过kill -9 +进程的pid数字，将高内存进程停掉，第四列数字是内存占用情况
 kill -s 9 pid 杀死进程
 
-
-chmod 644 filename 修改文件权限
-chown root filename 修改文件所有者  chown -R www /wwwroot/网站目录  (wordpress会用到)
-chown -R root 文件夹名 修改文件所有者
-chgrp root filename 修改文件用户组
-chgrp -R root 文件夹名 修改文件夹用户组
-mv filename newfilename 修改文件名
-
 --------------------------------------------------------------------------------------
 wdcp常用命令：
 清除日志	rm -rf /var/log/*
@@ -115,6 +107,14 @@ uid和gid为0和0 表示具有root权限，如果修改vim /etc/passwd 下的其
 x代替用户的真实密码，用户的真实密码是存在/etc/passwd文件里的。
 
 cat /etc/group  查看所有用户组列表
+
+chmod 644 filename 修改文件权限
+chown root filename 修改文件所有者  
+chown -R root 文件夹名 修改文件夹所有者   chown -R www /wwwroot/网站目录  (wordpress会用到)
+chgrp root filename 修改文件用户组
+chgrp -R root 文件夹名 修改文件夹用户组
+
+mv filename newfilename 修改文件名
 
 
 解压命令：

@@ -122,7 +122,23 @@ mv filename newfilename 修改文件名
 解压tar.gz文件
 tar -zxvf file_name.tar.gz
 或tar -zxvf file_name.tar.gz -C /path  解压到指定目录
+----------------------------------------------------------------------------------------
+删除命令
+rm rf 排除某一个或多个文件文件夹的删除
+1.确认extglob 已经开启
+#shopt extglob
+如果是off，开启extglob
+#shopt -s extglob
+shopt, -s 开启， -u 关闭
 
+2.新建几个文件和文件夹进行测试
+#touch main.c main.h hello.c hello.h
+#mkdir dir1 dir2
+
+保留hello.c hello.h dir1
+#rm -rf !(hello.c|hello.h|dir1)
+
+感叹号后不能有空格。
 ----------------------------------------------------------------------------------------
 ifconfig 查看Linux活动网卡与IP地址、子网掩码或者mac地址等信息
 ifconfig -a 查看所有网卡

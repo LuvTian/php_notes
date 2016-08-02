@@ -229,11 +229,15 @@ SELECT * FROM table_name;
 
 13、备份数据库
 mysqldump -u root -p --all-databases > databases.sql
+mysqldump -uroot -p www_rehack_cn > /var/www/www_rehack_cn.sql 备份指定数据库到指定目录下
+
 ls查看一下有没有生成databases.sql文件
 
 14、导入sql文件
 use db_name;
 source /www/xxx.sql
+或者
+mysql -uroot -p test < /var/www/www_rehack_cn.sql 将sql文件导入到指定的数据库
 
 ----------------------------------------------------------------------------
 

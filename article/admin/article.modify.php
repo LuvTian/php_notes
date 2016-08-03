@@ -2,7 +2,7 @@
 	require_once('../connect.php');
 	//读取旧信息
 	$id = $_GET['id'];
-	$query = mysql_query("select * from article where id=2");
+	$query = mysql_query("select * from article where id=$id");
 	$data = mysql_fetch_assoc($query);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,7 +28,9 @@ body {
   <tr>
     <td width="213" height="287" align="left" valign="top" bgcolor="#FFFF99"><p><a href="article.add.php">发布文章</a></p>
     <p><a href="article.manage.php">管理文章</a></p>      <a href="article.add.php"></a></td>
-    <td width="854" valign="top" bgcolor="#FFFFFF"><form id="form1" name="form1" method="post" action="article.modify.handle.php">
+    <td width="854" valign="top" bgcolor="#FFFFFF">
+
+    <form id="form1" name="form1" method="post" action="article.modify.handle.php">
     	<input type="hidden" name="id" value="<?php echo $data['id']?>" />
       <table width="590" border="0" cellpadding="8" cellspacing="1">
         <tr>

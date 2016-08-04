@@ -110,10 +110,13 @@ cat /etc/group  查看所有用户组列表
 
 chmod 644 filename 修改文件权限
 chmod 755 ./* -R 修改当前目录下所有文件和文件夹权限
+chmod +x -R /var/www/test/*
 chown root filename 修改文件所有者  
 chown -R root 文件夹名 修改文件夹所有者   chown -R www /wwwroot/网站目录  (wordpress会用到)
 chgrp root filename 修改文件用户组
 chgrp -R root 文件夹名 修改文件夹用户组
+
+chown -R www:www /var/www/wwwroot/*  -R递归处理所有文件和文件夹，第一个www代表文件的拥有者名称，第二个www代表所属群组名称。
 
 mv filename newfilename 修改文件名
 

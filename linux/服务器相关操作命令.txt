@@ -5,3 +5,58 @@ nginx -V：显示 nginx 的版本号以及编译环境信息以及编译时的�
 nginx -s reload 平滑重启nginx
 
 vi /usr/local/nginx/conf/mime.types 编辑mime配置
+**********************************************************************************************
+nginx配置gzip压缩
+首先查看nginx有没有安装了HttpGzip模块http_gzip_static_module  使用nginx -V查看
+
+然后编辑nginx/nginx.conf文件在http项里添加：
+# 开启gzip
+gzip on;
+
+# 启用gzip压缩的最小文件，小于设置值的文件将不会压缩
+gzip_min_length 1k;
+
+# gzip 压缩级别，1-10，数字越大压缩的越好，也越占用CPU。
+gzip_comp_level 2;
+
+# 进行压缩的文件类型。javascript有多种形式。其中的值可以在 mime.types 文件中找到。
+gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+
+# 是否在http header中添加Vary: Accept-Encoding，建议开启，该选项可以让前端的缓存服务器缓存经过GZIP压缩的页面，例如用Squid缓存经过Nginx压缩的数据。
+gzip_vary on;
+
+# 禁用IE 6 gzip
+gzip_disable "MSIE [1-6]\.";
+
+保存重启nginx nginx -s reload
+
+检测是否开启gzip成功有三种方式;
+1.通过curl命令检测 后面跟上网址或者css/js/image文件路径
+curl -I -H "Accept-Encoding: gzip, deflate" "http://www.rehack.cn"
+2.通过浏览器的调试工具查看Response Headers信息
+3.通过在线gzip检测工具
+
+**********************************************************************************************
+nginx开启静态文件缓存的配置
+location ~* ^.+\.(ico|gif|jpg|jpeg|png)$ {
+        access_log   off;
+        expires      30d;
+}
+
+location ~* ^.+\.(css|js|txt|xml|swf|wav)$ {
+    access_log   off;
+    expires      24h;
+}
+
+location ~* ^.+\.(html|htm)$ {
+        expires      1h;
+}
+
+**********************************************************************************************
+nginx配置字体文件的缓存和gzip压缩
+location ~* ^.+\.(eot|ttf|otf|woff|svg)$ {
+        access_log   off;
+        expires max;
+}
+woff 和 eot 进行 gzip 压缩效果不好
+gzip_types  font/ttf font/otf image/svg+xml

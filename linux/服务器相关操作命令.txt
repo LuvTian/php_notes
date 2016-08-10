@@ -60,3 +60,17 @@ location ~* ^.+\.(eot|ttf|otf|woff|svg)$ {
 }
 woff 和 eot 进行 gzip 压缩效果不好
 gzip_types  font/ttf font/otf image/svg+xml
+
+nginx服务器配置网站用户为www,用户组为www
+1.修改nginx.conf下面的user
+user www www;
+2.修改php-fpm.conf(有些配置文件在php-fpm.d/文件夹下)里面的user和group项
+user = apache
+group = apache
+
+;listen.owner = www
+;listen.group = www
+
+3.修改网站目录和文件的用户和组属性
+chown -R www.www /var/www/wwwroot
+三个地方需要统一一致

@@ -111,7 +111,7 @@ cat /etc/group  查看所有用户组列表
 chmod 644 filename 修改文件权限
 chmod 755 ./* -R 修改当前目录下所有文件和文件夹权限
 chmod +x -R /var/www/test/*
-chown root filename 修改文件所有者  
+chown root filename 修改文件所有者
 chown -R root 文件夹名 修改文件夹所有者   chown -R www /wwwroot/网站目录  (wordpress会用到)
 chgrp root filename 修改文件用户组
 chgrp -R root 文件夹名 修改文件夹用户组
@@ -205,6 +205,14 @@ getconf LONG_BIT
 ----------------------------------------------------------------------------------------
 tail -f filename 实时监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），刷新显示在屏幕上。退出按下CTRL+C
 查看网站最新错误日志：tail -f /var/log/nginx/error.log
+----------------------------------------------------------------------------------------
+
+linux分区
+boot分区是系统启动分区200M
+home分区做上传下载 2G
+swap分区是必须的 swap文件系统 一般为内存的2倍
+剩下的都给根分区
+
 ----------------------------------------------------------------------------------------
 
 cmd命令：

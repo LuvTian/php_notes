@@ -280,3 +280,4 @@ id字段使用smallint
 尽量少用text类型
 使用bigint存储IP地址,使用inet_aton将IP地址转化为bigint,使用inet_ntoa将bigint转换为IP地址
 年龄使用tinyint
+金钱数字使用decimal

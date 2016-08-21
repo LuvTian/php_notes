@@ -274,10 +274,11 @@ ALTER TABLE table_name ADD ziduan_name smallint unsigned;
 ----------------------------------------------------------------------------
 数据类型
 id字段使用smallint
-日期时间使用init  使用from_unixtime()将int类型转换为日期,使用unix_timestamp()将日期转换为int
+日期时间使用init(10)  使用from_unixtime()将int类型转换为日期,使用unix_timestamp()将日期转换为int
 使用简单数据类型，int比varchar类型在mysql处理上简单
 尽可能使用not null 定义字段，设置默认值
 尽量少用text类型
 使用bigint存储IP地址,使用inet_aton将IP地址转化为bigint,使用inet_ntoa将bigint转换为IP地址
 年龄使用tinyint
 金钱数字使用decimal
+手机号用char(11)

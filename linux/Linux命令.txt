@@ -145,8 +145,10 @@ shopt, -s 开启， -u 关闭
 
 保留hello.c hello.h dir1
 #rm -rf !(hello.c|hello.h|dir1)
-
 感叹号后不能有空格。
+
+删除多个文件夹或文件
+rm -rf folder1 folder2
 ----------------------------------------------------------------------------------------
 ifconfig 查看Linux活动网卡与IP地址、子网掩码或者mac地址等信息
 ifconfig -a 查看所有网卡
@@ -189,7 +191,9 @@ scp <remote user>@<remote machine>:<remote path> <local file>
 ----------------------------------------------------------------------------------------
 查找命令
 查找某个文件  find / -name "*.log"
-查找文件中某个字符串  find / -name "*" | xargs grep "string"
+查找文件中某个字符串  find / -name "*" | xargs grep "string" /表示根目录 *表示所有文件 string表示文件包含的字符串
+
+grep只能查找目录 不能指定文件或文件类型
 ----------------------------------------------------------------------------------------
 查看流量
 查看各网卡流量动态   watch cat /proc/net/dev

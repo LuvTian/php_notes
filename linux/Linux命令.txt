@@ -219,5 +219,79 @@ swap分区是必须的 swap文件系统 一般为内存的2倍
 
 ----------------------------------------------------------------------------------------
 
+crontab定时任务
+1.检查服务
+1)检查Crontab工具是否安装：crontab -l;
+2)检查crond服务是否启动：service crond status
+3)查看crontab服务是否已设置为开机启动，执行命令：ntsysv
+4)加入开机自动启动: chkconfig –level 35 crond on
+
+2.安装cron:
+1)yum install vixie-cron;
+2)yum install crontabs
+
+3.Crontab的基本组成
+crond 系统服务 + 配置文件 + 配置工具crontab
+
+4.Crontab的配置文件格式
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  * user-name  command to be executed
+
+
+* * * * * 命令
+第1个*表示分钟 0~59
+第2个*表示小时 0~23
+第3个*表示日期 1~31
+第4个*表示月份 1~12
+第5个*表示星期 0~6（0表示星期天）
+
+
+
+5.用户级别的实例  crontab -e直接编辑增加计划任务 可以不用指定用户
+每晚21：30重启apache
+30 21 * * * service httpd restart
+
+每月1 10 22 日的4：45重启apache
+45 4 1，10，22 * * service httpd restart
+
+10 1 * * 6,0 /etc/init.d/nginx restart
+每周六、周日的1 : 10重启nginx。
+
+每隔两分钟重启apache服务器
+*/2 * * * * service httpd restart
+1-59/2 * * * * service httpd restart
+
+晚上11点到早上7点之间，每隔一小时重启apache
+0 23-7/1 * * * service httpd restart
+
+每天18：00到23：00之间每隔30分钟重启apache
+0,30 18-23 * * * service httpd restart
+0-59/30 18-23 * * * service httpd restart
+
+*表示任何时候都匹配 取值范围内的数字
+可以用“A,B,C”表示A或B或C时执行命令
+可以用A-B 表示A到B之间时执行命令
+可以用*/A 表示每A分钟【小时等】执行一次命令 /代表每
+
+6.以系统运行级的方式添加计划任务
+编辑/etc/crontab文件 注意一定要指定用户
+然后service crond restart 重启生效
+
+这两种方式的区别：你要是用root账户，两种都可以用， 你要是普通用户 那就 crontab －e
+
+crontab -e -u user1 //为用户user1创建或编辑crontab命令
+crontab -l -u user1 //查看用户user1的crontab命令
+crontab -r -u 删除某个用户的所有cron服务
+
+tail -f /var/log/cron //查看定时任务执行的log日志
+
+
+----------------------------------------------------------------------------------------
 cmd命令：
 查看域名解析  nslookup 域名
+----------------------------------------------------------------------------------------

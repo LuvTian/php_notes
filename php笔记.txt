@@ -92,7 +92,35 @@
 $_POST和$_GET是一个数组类型的超全局变量，接收前端表单传递来的数据，返回一个数组
 可以直接使用json_encode函数把前端传来的表单数据解析成json格式再返回给前端：echo json_encode($_POST);当然直接这样是没有意义的
 
-26.防sql注入
+26.通过mysqli类库操作数据库步骤
+建立到mysql的链接,打开指定的数据库 $con=new mysqli('localhost','root','root','test');
+设置默认的客户端的字符集 $con->set_charset('utf8');
+执行的sql查询 $result=$con->query("SELECT * FROM test");
+释放结果集 php有自动回收的机制
+关闭链接    $con->close();
+
+$con->connect_errno:得到连接产生的错误编号。
+$con->connect_error:得到连接产生的错误信息。
+
+执行SQL语句的返回值：
+select/desc/describe/show/explain执行成功返回myslqi_result结果集，失败为false；
+其他SQL语句执行成功为true，失败为false
+
+执行INSERT语句成功的时候可以得到自增长的id值：$con->insert_id;
+执行INSERT、UPDATE、DELETE语句可以得到受影响的记录数 $con->affected_rows
+
+affected_rows值有三种：
+1).得到受影响的记录数
+2).-1 表示sql语句有问题
+3).0 表示没有受影响的记录
+
+执行SELECT语句成功返回一个结果集对象，失败返回false，成功还可以得到结果集里的记录条数(大于0)：$result->num->rows;
+结果集对象的方法：
+$result->fetch_all();等价于$result->fetch_all(MYSQLI_NUM); 获取结果集中的所有记录，并以二维的索引数组返回
+$result->fetch_all(MYSQLI_ASSOC);获取结果集中的所有记录，并以二维的关联数组返回
+
+
+29.防sql注入
 intval($_GET['id'])
 
 

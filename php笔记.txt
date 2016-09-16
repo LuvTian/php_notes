@@ -120,8 +120,7 @@ $result->fetch_all();等价于$result->fetch_all(MYSQLI_NUM); 获取结果集中
 $result->fetch_all(MYSQLI_ASSOC);获取结果集中的所有记录，并以二维的关联数组返回
 
 
-29.防sql注入
-intval($_GET['id'])
+
 
 
 

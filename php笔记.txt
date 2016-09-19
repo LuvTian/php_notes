@@ -96,7 +96,7 @@ $_POST和$_GET是一个数组类型的超全局变量，接收前端表单传递
 建立到mysql的链接,打开指定的数据库 $con=new mysqli('localhost','root','root','test');
 设置默认的客户端的字符集 $con->set_charset('utf8');
 执行的sql查询 $result=$con->query("SELECT * FROM test");
-释放结果集 php有自动回收的机制
+释放结果集   $result->free();  php有自动回收的机制
 关闭链接    $con->close();
 
 $con->connect_errno:得到连接产生的错误编号。
@@ -114,14 +114,31 @@ affected_rows值有三种：
 2).-1 表示sql语句有问题
 3).0 表示没有受影响的记录
 
-执行SELECT语句成功返回一个结果集对象，失败返回false，成功还可以得到结果集里的记录条数(大于0)：$result->num->rows;
-结果集对象的方法：
+执行SELECT语句成功返回一个结果集对象，失败返回false，成功还可以得到结果集里的记录条数(大于0)：$result->num_rows;
+从结果集中取出记录的结果集对象的方法：
 $result->fetch_all();等价于$result->fetch_all(MYSQLI_NUM); 获取结果集中的所有记录，并以二维的索引数组返回
 $result->fetch_all(MYSQLI_ASSOC);获取结果集中的所有记录，并以二维的关联数组返回
+$result->fetch_all(MYSQLI_BOTH); 既有关联又有索引
 
+注意fetch_all()方法只在带有 MySQL Native Driver 时可用，需要安装mysqlnd
 
+对于不支持fetch_all()的，可以使用fetch_array();方法代替 ，但此方法每次只能从结果集中取出一条记录，如果想全部取出，需要进行循环
+$result->fetch_array();返回只包含一条记录既有关联又有索引的数组,等价于$result->fetch_array(MYSQLI_BOTH);
+$result->fetch_array(MYSQLI_ASSOC);返回只包含一条记录的关联数组，等价于$result->fetch_assoc();
+$result->fetch_array(MYSQLI_NUM);返回只包含一条记录的索引数组，等价于$result->fetch_row();
 
+while($row=$result->fetch_assoc()){
+    print_r($row);
+    echo "<hr>";
+    // $arr[]=$row;存到一个数组中
+}
 
+另外fetch_object();方法从结果集中取得当前行，并作为对象返回。
+
+27.PDO
+1).配置PDO（以mysql为例）
+在php.ini里开启extension = php_pdo.dll和extension = php_pdo_mysql.dll
+开启后通过phpinfo可以查看PDO扩展的详细信息
 
 
 

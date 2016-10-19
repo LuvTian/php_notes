@@ -140,7 +140,8 @@ while($row=$result->fetch_assoc()){
 在php.ini里开启extension = php_pdo.dll和extension = php_pdo_mysql.dll
 开启后通过phpinfo可以查看PDO扩展的详细信息
 
-
+28.使用composer安装扩展需要开启openssl
+在D:\phpStudy\php55n\php.ini  开启 extension=php_openssl.dll
 
 
 

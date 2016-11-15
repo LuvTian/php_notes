@@ -14,4 +14,4 @@
 
 vendor 目录不能随便手动加 只能通过composer命令来
 
-join和view方法不能连接自身
+使用join和view方法连接自身时 不能使用whereTime方法 两者只能使用其一

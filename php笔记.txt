@@ -144,7 +144,7 @@ while($row=$result->fetch_assoc()){
 在D:\phpStudy\php55n\php.ini  开启 extension=php_openssl.dll
 
 
-
+29.php5.6  php.ini  always_populate_raw_post_data = -1
 
 
 

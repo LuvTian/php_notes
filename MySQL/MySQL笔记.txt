@@ -291,7 +291,7 @@ id字段使用smallint
 为了不出现这条无效的结果，可以在mysql语句后面加上GROUP BY NULL
 在php里测试是可以的，但在navicat工具里测试还是会返回一条记录
 
-2.在where后面不能跟sum函数，可以用having代替
+2.在where后面不能跟sum函数(where里面不能使用聚合函数)，可以用having代替
 where 条件 group by 字段
 
 having 集合判断,用having的时候 group by要放在having的前面

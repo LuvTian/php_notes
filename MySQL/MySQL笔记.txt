@@ -227,9 +227,10 @@ FOREIGN KEY (pid) REFERENCES provinces (id)
 12、查询记录
 SELECT * FROM table_name;
 
-13、备份数据库
+13、导出备份数据库
 mysqldump -u root -p --all-databases > databases.sql
 mysqldump -uroot -p www_rehack_cn > /var/www/www_rehack_cn.sql 备份指定数据库到指定目录下
+注意这里是数据库的用户名和密码不是服务器的。
 
 ls查看一下有没有生成databases.sql文件
 

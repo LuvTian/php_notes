@@ -146,7 +146,7 @@ while($row=$result->fetch_assoc()){
 
 29.php5.6  php.ini  always_populate_raw_post_data = -1
 
-
+30.array_column() 返回输入数组中某个单一列的值。如有一个学生表数组，我想取出每一个学生的成绩，放到一个数组里
 
 
 

@@ -1,0 +1,42 @@
+只有name字段内容相同，该如何合并表一和表二然后再插入到新表？
+
+表a
+id  name  age
+1   张三  23
+2   李四  26
+...
+
+
+表b
+id  name  money
+1   李四  500
+2   张三  800
+...
+
+合并后c表
+id  name  age  money
+1   张三  23   800
+2   李四  26   500
+...
+
+查询方法一：
+select a.id,a.name,a.age,b.money from a inner join b on a.name = b.name;
+
+查询方法二：
+select a.id,a.name,a.age,b.money from a,b where a.name=b.name
+
+最后将查询结果插入到新表c（提前建立好c表和所有字段）：
+INSERT INTO c (name,age,money)
+select a.name,a.age,b.money from a inner join b on a.name = b.name;
+
+更简单直接的方法是在查询的同时创建数据表有，一步到位（推荐用此方式）：
+CREATE TABLE c AS
+SELECT a.id,a.name,a.age,b.money FROM a,b WHERE a.name=b.name
+
+如果不想创建新表而是在原表基础上合并，可以采用以下方式：
+merge into b
+using a
+on a.name=b.name
+when matched
+  update b.money = a.money
+前提是b表要在合并前增加上money字段

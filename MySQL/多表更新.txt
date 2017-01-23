@@ -1,0 +1,23 @@
+参照一个表更新另一个表
+Update 1
+data loading in new table using LOAD DATA LOCAL INFILE. In MyISAM it took 38.93 sec while in InnoDB it took 7 min 5.21 sec. Then I did:
+UPDATE table1 t1, table2 t2
+SET
+t1.field1 = t2.field1,
+t1.field2 = t2.field2,
+t1.field3 = t2.field3
+WHERE t1.field10 = t2.field10
+
+Query OK, 434914 rows affected (22 hours 14 min 47.55 sec)
+Update 2
+same update with join query
+UPDATE table1 a JOIN table2 b
+ON a.field1 = b.field1
+SET
+a.field2 = b.field2,
+a.field3 = b.field3,
+a.field4 = b.field4
+
+(14 hours 56 min 46.85 sec)
+
+参考：http://dba.stackexchange.com/questions/119621/how-to-update-10-million-rows-in-mysql-single-table-as-fast-as-possible

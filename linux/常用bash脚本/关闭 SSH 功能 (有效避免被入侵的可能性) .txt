@@ -1,0 +1,9 @@
+#!/bin/sh
+service ssh stop
+service sshd stop
+systemctl stop sshd.service
+systemctl stop ssh.service
+chkconfig ssh off
+chkconfig sshd off
+systemctl disable sshd.service
+systemctl disable ssh.service

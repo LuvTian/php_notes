@@ -1,0 +1,5 @@
+https://github.com/mcsrainbow/shell-scripts/blob/master/scripts/zcron
+此脚本可以用来记录所有cron job的执行时间和返回码，并交给Zabbix自动发现并监控。
+
+比如:
+0 12 * * * zcron mysql_backup_zabbix /root/bin/mysql_backup_zabbix.sh >> /root/mysql_backup_zabbix.log 2>&1

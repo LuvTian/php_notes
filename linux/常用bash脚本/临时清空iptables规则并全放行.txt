@@ -1,2 +1,0 @@
-#!/bin/sh
-iptables -F;iptables -X;iptables -P INPUT ACCEPT;

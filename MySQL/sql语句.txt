@@ -12,6 +12,12 @@ update table_name set mobile_num = '13540025225' WHERE name = 'Wilson';
 
 update table_name set tel = insert(tel,4,4,'****');把数据库中手机号(tel字段)中间4位替换为*号
 
+批量替换指定字段中的字符串：
+UPDATE 表名 SET
+指定字段 = replace (指定字段, '想要替换的字符串', '替换成的字符串')
+WHERE 条件;
+
+
 5.复制备份语句
 select * into test from sk_patient_copy where 1=2;（mysql不支持这种语句）
 create table new_table_name (select * from old_table_name where 1=2); //1=2表示只复制表结构不复制数据 where 1=1 相当于没有条件，所有的都符合

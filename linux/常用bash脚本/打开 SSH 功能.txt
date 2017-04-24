@@ -1,9 +1,0 @@
-#!/bin/sh
-service ssh start
-service sshd start
-chkconfig ssh on
-chkconfig sshd on
-systemctl enable ssh.service
-systemctl enable sshd.service
-systemctl start ssh.service
-systemctl start sshd.service

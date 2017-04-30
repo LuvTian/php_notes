@@ -18,6 +18,9 @@ UPDATE 表名 SET
 WHERE 条件;
 
 
+批量为某个字段追加数据:
+UPDATE 表名 SET 指定字段 = concat(指定字段,'要追加的内容') WHERE;
+
 5.复制备份语句
 select * into test from sk_patient_copy where 1=2;（mysql不支持这种语句）
 create table new_table_name (select * from old_table_name where 1=2); //1=2表示只复制表结构不复制数据 where 1=1 相当于没有条件，所有的都符合

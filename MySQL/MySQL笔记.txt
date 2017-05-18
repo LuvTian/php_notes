@@ -246,13 +246,20 @@ mysql -uroot -p test < /var/www/www_rehack_cn.sql 将sql文件导入到指定的
 GRANT ALL PRIVILEGES ON database_name.* TO username@'%' IDENTIFIED BY 'password'; 指定某个数据库 添加或授权一个用户名为username，密码为password，授权为% （%表示所有ip能连接，可以设置指定ip或者localhost）
 
 
-GRANT ALL PRIVILEGES ON *.* TO rehack@'%' IDENTIFIED BY '198874' WITH GRANT OPTION; 让rehack用户从任何ip（主机）远程连接到mysql服务器，建议不要给root用户这样的权限，*.* 这里前面的*号表示所有的数据库，后面的*号表示所有的权限
+GRANT ALL PRIVILEGES ON *.* TO rehack@'%' IDENTIFIED BY '123456' WITH GRANT OPTION; 让rehack用户从任何ip（主机）远程连接到mysql服务器，建议不要给root用户这样的权限，*.* 这里前面的*号表示所有的数据库，后面的*号表示所有的权限
+
+update user set password = password('x123456.') where user='root'; //设置root用户密码
 
 FLUSH PRIVILEGES; 刷新数据库权限
 
 
 use mysql;
 SELECT host,user,password FROM user; 查看mysql数据库用户
+
+删除多余用户
+mysql> delete from mysql.user where user=' ';
+mysql> delete from mysql.user where host='::1';
+mysql> delete from mysql.user where host='xxx';
 
 ----------------------------------------------------------------------------
 修改表

@@ -84,9 +84,9 @@ INSERT [INTO] table_name SET colunm_name1="",colunm_name2=""...
 与第一种方式的区别在于，此方法可以使用子查询
 
 第三种插入记录的方式
-次方法可以将查询(SELECT)的结果插入到指定的数据表
+此方法可以将查询(SELECT)的结果插入到指定的数据表
 insert table_name [(colname...)] select.....
-INSERT test (username) SELECT username FROM users WHERE age>25; //从users表里取出数据插入到test表中，注意字段要对应
+INSERT test (`username`) SELECT `username` FROM users WHERE age>25; //从users表里取出数据插入到test表中，注意字段要对应
 INSERT tdb_goods_cates (cate_name) SELECT goods_cate FROM tdb_goods GROUP BY goods_cate;//将子查询分类结果写入表中
 
 修改更新记录UPDATE
@@ -117,6 +117,10 @@ SELECT * FROM users ORDER BY age ASC; 按照年龄升序排序，默认是ASC DE
 限制查询结果所返回的数量 LIMIT
 SELECT * FROM users LIMIT 2; //返回两条记录
 SELECT * FROM users LIMIT 2,4; //从第2位开始(从0开始计算的) 返回4条记录
+
+查询多个值
+SELECT * FROM table_name WHERE column_name IN (value1,value2,...)
+
 
 子查询(subquery)
 子查询指嵌套在查询内部，且必须始终出现在圆括号内。

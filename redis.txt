@@ -1,0 +1,26 @@
+## 安装
+wget http://download.redis.io/releases/redis-4.0.11.tar.gz
+tar -zxvf redis-4.0.11.tar.gz
+cd redis-4.0.11
+make
+make install PREFIX=/usr/local/redis  安装到/usr/local/redis目录下
+
+## 后台启动Redis
+cp redis.conf /usr/local/redis
+cd /usr/local/redis
+vim redis.conf #把deamonize no改为deamonize yes
+./bin/redis-server ./redis.conf #后台启动Redis
+
+## 测试Redis
+ps aux | grep redis 查看redis服务是否启动
+
+./redis-cli 进入redis客户端命令行工具
+set foo bar 设置一条数据
+get foo 查看某个数据
+keys * 查看所有数据
+
+## redis.conf一般配置
+1.redis默认只能本地访问，若需要外部访问，把bind 127.0.0.1修改为bind 0.0.0.0 或指定IP
+2.redis默认没有密码，修改requirepass 123456即可添加密码
+3.redis默认端口6379.为了安全性可以修改port xxxx，修改端口后防火墙firewalld里要添加相应的端口
+

@@ -15,3 +15,6 @@
 vendor 目录不能随便手动加 只能通过composer命令来
 
 使用join和view方法连接自身时 不能使用whereTime方法 两者只能使用其一
+
+5.在phpstudy环境下出现No input file specified这个错误
+修改nginx虚拟机root目录这个配置的斜杠是不是/而不是\

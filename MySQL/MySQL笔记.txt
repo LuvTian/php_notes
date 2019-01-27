@@ -157,6 +157,13 @@ ALTER TABLE tdb_goods CHANGE goods_cate cate_id SMALLINT UNSIGNED NOT NULL,CHANG
 为自动编号的字段在插入记录的时候不需要进行赋值
 如果没有自动编号属性的主键字段是可以赋值的，但不能重复
 
+### 重置(复位)mysql的主键id自增值
+方法一：
+ALTER TABLE table_name AUTO_INCREMENT = n;
+这条sql语句的最大好处就是，不会删除表里的数据，后面的新增数据会从指定的值n开始自增，不过n值需要设置为大于当前自增列的值。
+方法二：
+truncate table_name;
+此方法简单，但要慎用，因为会清空表里的数据，然后从新开始自增。
 
 ----------------------------------------------------------------------------
 约束：

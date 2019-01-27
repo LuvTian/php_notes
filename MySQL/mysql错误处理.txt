@@ -1,5 +1,5 @@
 SQLSTATE[HY000] [2002] No such file or directory
 
-1.mysql¶Ë¿ÚÊÇ·ñÅäÖÃÕýÈ·
+1.mysqlç«¯å£æ˜¯å¦é…ç½®æ­£ç¡®
 
-2.hostnameÊÇ127.0.0.1 ²»ÊÇlocalhost
+2.hostnameæ˜¯127.0.0.1 ä¸æ˜¯localhost

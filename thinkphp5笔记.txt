@@ -20,3 +20,5 @@ vendor 目录不能随便手动加 只能通过composer命令来
 修改nginx虚拟机root目录这个配置的斜杠是不是/而不是\
 
 6.tp5刚安装好出现404
+500错误排查是否开了全局代理
+502 Bad Gateway php-fpm服务是否开启

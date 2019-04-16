@@ -22,3 +22,11 @@ vendor 目录不能随便手动加 只能通过composer命令来
 6.tp5刚安装好出现404
 500错误排查是否开了全局代理
 502 Bad Gateway php-fpm服务是否开启
+
+7.设置指定域名允许跨域请求api,要加上http
+Route::post('api/gettoken/user','express_admin_api/Token/getToken')
+->header('Access-Control-Allow-Origin','http://192.168.1.253:8080')
+->allowCrossDomain();
+设置所有域名都允许跨域访问直接：
+Route::post('api/gettoken/user','express_admin_api/Token/getToken')
+->allowCrossDomain();

@@ -30,3 +30,4 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 设置所有域名都允许跨域访问直接：
 Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 ->allowCrossDomain();
+如果出现OPTIONS 500跨域错误，检查是否开启了网络代理

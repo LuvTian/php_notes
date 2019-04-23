@@ -31,3 +31,6 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 ->allowCrossDomain();
 如果出现OPTIONS 500跨域错误，检查是否开启了网络代理
+
+
+8.一对一模型关联：在有外键的模型(img_id)里用belongsTo 没有外键的模型用hasOne

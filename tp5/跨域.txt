@@ -1,0 +1,4 @@
+在路由里加上allowCrossDomain();
+如果加上后没有效果，ctrl + f5强制刷新浏览器
+
+如果跨域报错信息里出现 but only one is allowed，说明在nginx服务器或应用代码里都配置了跨域选项，去掉一边的配置即可

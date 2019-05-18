@@ -1,4 +1,77 @@
-在路由里加上allowCrossDomain();
+tp5接口跨域的解决方案：
+1.在路由里加上allowCrossDomain();
 如果加上后没有效果，ctrl + f5强制刷新浏览器
 
+2.用中间件
+<?php
+// 跨域控制
+namespace app\http\middleware;
+
+class CORS
+{
+    public function handle($request, \Closure $next)
+    {
+        $response = $next($request);
+        $origin = $request->server('HTTP_ORIGIN') ?: '';
+        $allow_origin = [
+            'http://zz.cnguu.cn',
+        ];
+        if (in_array($origin, $allow_origin)) {
+            $response->header('Access-Control-Allow-Origin', $origin);
+            $response->header('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept, Origin, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With, X-Id, X-Token');
+            $response->header('Access-Control-Expose-Headers', 'Authorization, authenticated');
+            $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+            $response->header('Access-Control-Allow-Credentials', 'true');
+        }
+        return $response;
+    }
+}
+
+
+
+3.用nginx设置跨域response headers
+参考https://enable-cors.org/server_nginx.html
+server {
+    add_header 'Access-Control-Allow-Origin' $http_origin;
+    add_header 'Access-Control-Allow-Credentials' 'true';
+    add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+    add_header 'Access-Control-Allow-Headers' 'Authorization,Accept,Origin,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+    
+    location / {
+        if ($request_method = 'OPTIONS') {
+            add_header 'Access-Control-Allow-Origin' '*';
+            add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+            #
+            # Custom headers and headers various browsers *should* be OK with but aren't
+            #
+            add_header 'Access-Control-Allow-Headers' 'Authorization,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';
+            #
+            # Tell client that this pre-flight info is valid for 20 days
+            #
+            add_header 'Access-Control-Max-Age' 1728000;
+            add_header 'Content-Type' 'text/plain; charset=utf-8';
+            add_header 'Content-Length' 0;
+            return 204;
+        }
+    }
+}
+
+
+
+
 如果跨域报错信息里出现 but only one is allowed，说明在nginx服务器或应用代码里都配置了跨域选项，去掉一边的配置即可
+
+##############
+# 为什么postman调接口不会跨域而浏览器会？
+都在说跨域，为什么postman能访问接口，而浏览器就不行呢？这里需要理解什么是跨域，跨域是指的当前资源访问其他资源时发起的http请求由于安全原因（由于同源策略，域名、协议。端口中只要有一个不同就不同源），浏览器限制了这些请求的正常访问，特别需要注意的是这些发生在浏览器中。而通过postman等工具调用接口时，只是简单的访问一个资源，并不存在资源的相互访问。
+# 回调函数
+这里就不细讲回调函数啦，相信各位都能理解，用一个案例来说一下。
+“服务器”和“客户端”初次相识，相谈甚欢，客户端希望服务器把一个叫json的东西给它，”服务器“：你先忙着，我弄好了发给你，把你电话号码（回调函数）给我。
+跨域中的预检请求即是指浏览器在真正发送请求前，会先发送一个Options请求嗅探，请求成功后才会发送真实的请求。问答三连：
+为什么需要发送预检请求？是因为触发了浏览器的安全校验。
+为什么请求会触发安全校验？因为当前请求是一个"复杂请求"。
+为什么我的请求是“复杂的”?见下面解释
+#复杂和简单请求
+简单请求：请求方法是GET/HEAD/POST，并且contentType为text/plain、application/x-www-form-urlencoded、multipart/form-data。
+不满足上述条件的视为复杂请求，开发中我们常触发这个条件大多因为我们的请求的contentType设置的是application/json导致的。
+简单请求如果设置了Authentication认证header也会让请求“升级”为复杂请求。

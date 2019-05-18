@@ -4,26 +4,31 @@ tp5接口跨域的解决方案：
 
 2.用中间件
 <?php
-// 跨域控制
-namespace app\http\middleware;
 
+namespace app\http\middleware;
+use think\Response;
 class CORS
 {
     public function handle($request, \Closure $next)
-    {
-        $response = $next($request);
-        $origin = $request->server('HTTP_ORIGIN') ?: '';
-        $allow_origin = [
-            'http://zz.cnguu.cn',
-        ];
-        if (in_array($origin, $allow_origin)) {
-            $response->header('Access-Control-Allow-Origin', $origin);
-            $response->header('Access-Control-Allow-Headers', 'Authorization, Content-Type, Accept, Origin, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With, X-Id, X-Token');
-            $response->header('Access-Control-Expose-Headers', 'Authorization, authenticated');
-            $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
-            $response->header('Access-Control-Allow-Credentials', 'true');
+    {   
+        //$origin = $request->server('HTTP_ORIGIN') ?: '';
+        $method = $request->method();
+        // var_dump($request);
+        $isOptions =$request->isOptions();
+        // var_dump($method);
+        // exit;
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With');
+        header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE');
+        // header('Access-Control-Max-Age: 1728000');
+        // $request->header('Access-Control-Allow-Credentials', 'true');
+        if ($isOptions) {
+            // return Response::create()->send();
+            // var_dump('进入options判断');
+            // header("rehack-if: $method");
+            exit;
         }
-        return $response;
+        return $next($request);
     }
 }
 
@@ -56,7 +61,14 @@ server {
     }
 }
 
-
+4.在路由tp5文件的开始加上如下代码：（推荐这种方式）
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With');
+header('Access-Control-Allow-Methods: GET, POST');
+header('Access-Control-Max-Age: 1728000');
+if(Request::isOptions()){
+    exit();
+}
 
 
 如果跨域报错信息里出现 but only one is allowed，说明在nginx服务器或应用代码里都配置了跨域选项，去掉一边的配置即可

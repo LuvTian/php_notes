@@ -34,3 +34,6 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 
 
 8.一对一模型关联：在有外键的模型(img_id)里用belongsTo 没有外键的模型用hasOne
+
+9.只要开启了app_debug=true或者数据库调试模式(database.php下的debug=true)任何一项，都会写入日志记录runtime/log,当这两项调试模式都为false的时候，才没有日志写入
+如果不要数据库sql查询每次都要执行show column FROM xxx查询字段信息，因为这样影响性能。可以生成数据表字段缓存（php think optimize:schema --db demo）来优化，同时还需要关闭数据库调试模式（database.php下的debug=false）

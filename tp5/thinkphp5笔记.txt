@@ -37,3 +37,18 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 
 9.只要开启了app_debug=true或者数据库调试模式(database.php下的debug=true)任何一项，都会写入日志记录runtime/log,当这两项调试模式都为false的时候，才没有日志写入
 如果不要数据库sql查询每次都要执行show column FROM xxx查询字段信息，因为这样影响性能。可以生成数据表字段缓存（php think optimize:schema --db demo）来优化，同时还需要关闭数据库调试模式（database.php下的debug=false）
+
+10.关于配置：
+应用配置：与application同级的config目录下
+模块配置：有两个地方可以放模块配置，一是在每个模块下的config目录 application/module/config，二是可以把application/module/config移动到应用配置目录下的module/config. 
+一旦模块目录下面存在config目录，则应用配置目录下的模块配置则无效，也不会对两个目录的配置进行合并
+
+
+11.开发阶段安全措施：开启强制路由，路由分组
+12.部署阶段安全措施：
+关闭应用调试模式，关闭数据库调试模式，
+13.部署阶段优化：
+通过命令行生成类库映射文件；
+通过命令行生成配置缓存文件；
+生成数据表字段缓存文件；
+生成路由映射缓存（前提要开启路由延迟解析）

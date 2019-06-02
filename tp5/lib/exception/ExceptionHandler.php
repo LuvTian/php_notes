@@ -25,7 +25,7 @@ class ExceptionHandler extends Handle
     public function render(\Exception $e)
     {
         if ($e instanceof BaseException) {
-            // 属于客户端的异常
+            // 属于客户端的产生的异常
             //自定义异常
             $this->code = $e->code;
             $this->msg = $e->msg;
@@ -43,11 +43,11 @@ class ExceptionHandler extends Handle
             }
 
         }
-        $request = Request::instance();
+        // $request = Request::instance();
         $result = [
             'msg' => $this->msg,
             'error_code' => $this->errorCode,
-            'request_url' => $request->url()
+            'request_url' => Request::url()
         ];
         return json($result, $this->code);
     }

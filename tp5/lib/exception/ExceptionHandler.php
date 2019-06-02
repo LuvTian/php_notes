@@ -7,7 +7,7 @@ use think\facade\Log;
 use think\facade\Request;
 use think\facade\Env;
 // use Env;
-use App;
+
 /**
  * Class ExceptionHandler
  * @package app\lib\exception
@@ -63,7 +63,7 @@ class ExceptionHandler extends Handle
             'path' => Env::get('runtime_path') . 'errlog/'.DIRECTORY_SEPARATOR,
             'level' => ['error']
         ]);
-        // 错误文件 错误行号 IP 错误信息
+        // IP 错误文件 错误行号 错误信息
         $err_log_txt = Request::ip().' '.$e->getFile().' '.$e->getLine().' '.$e->getMessage();
         //生产环境记录服务器内部错误
         Log::record($err_log_txt, 'error');

@@ -1,7 +1,8 @@
+创建新项目需要做的事情：
 需要拷贝的文件lib全局异常处理类、service服务层、validata验证层、BaseController.php、BaseModel.php
 lib是在应用目录application下，service和validate都是在模块目录下,BaseController.php是在模块目录下的控制器目录
 
-需要修改配置文件app.php的异常处理类'exception_handle'       => 'app\lib\exception\ExceptionHandler',
+需要修改应用配置文件app.php的异常处理类'exception_handle' => '\\app\\lib\\exception\\ExceptionHandler' 在模块下进行配置也可以，一般就在全局下进入配置
 
 需要修改命名空间
 

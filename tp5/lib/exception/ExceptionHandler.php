@@ -1,10 +1,13 @@
 <?php
 namespace app\lib\exception;
 
+// use Exception;用\Exception可以无需引入
 use think\exception\Handle;
-use think\Log;
+use think\facade\Log;
 use think\facade\Request;
-
+use think\facade\Env;
+// use Env;
+use App;
 /**
  * Class ExceptionHandler
  * @package app\lib\exception
@@ -16,22 +19,25 @@ class ExceptionHandler extends Handle
     private $errorCode;
 
     /**
-     * @param \Exception $e
+     * @param \Exception $e 这里的Exception指的是PHP的Exception，而不是thinkphp的Exception，所以无需use think\Exception,如果在命名空间引用了php的Exception就用Exception,如果没有引用就用\Exception,建议使用\Exception
      * @return \think\Response|\think\response\Json
      */
     public function render(\Exception $e)
     {
         if ($e instanceof BaseException) {
+            // 属于客户端的异常
             //自定义异常
             $this->code = $e->code;
             $this->msg = $e->msg;
             $this->errorCode = $e->errorCode;
         } else {
+            // 属于系统的异常
             if (config("app_debug")) {
+                // 在应用调试模式下 错误交给tp系统处理
                 return parent::render($e);
             } else {
                 $this->code = 500;
-                $this->msg = '服务器内部错误';
+                $this->msg = '系统错误，请联系管理员';
                 $this->errorCode = 999;
                 $this->recordErrorLog($e);
             }
@@ -51,11 +57,15 @@ class ExceptionHandler extends Handle
      */
     private function recordErrorLog(\Exception $e)
     {
+        // dump(Env::get('root_path'). 'log'.DIRECTORY_SEPARATOR);die;
         Log::init([
             'type' => 'File',
-            'path' => ROOT_PATH. 'log' .DS,
+            'path' => Env::get('runtime_path') . 'errlog/'.DIRECTORY_SEPARATOR,
             'level' => ['error']
         ]);
-        Log::record($e->getMessage(), 'error');//生产环境记录服务器内部错误
+        // 错误文件 错误行号 IP 错误信息
+        $err_log_txt = Request::ip().' '.$e->getFile().' '.$e->getLine().' '.$e->getMessage();
+        //生产环境记录服务器内部错误
+        Log::record($err_log_txt, 'error');
     }
 }

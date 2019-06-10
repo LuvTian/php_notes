@@ -24,17 +24,20 @@ keys * 查看所有数据
 2.redis默认没有密码，修改requirepass 123456即可添加密码
 3.redis默认端口6379.为了安全性可以修改port xxxx，修改端口后防火墙firewalld里要添加相应的端口
 
-## 为php7编译安装phpredis扩展phpredis
-wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz
+## 为php7编译安装phpredis扩展phpredis phpredis是第三方扩展只能动态编译，必须以so的形式引入
+wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz 或者下载地址http://pecl.php.net/get/redis
 tar -zxvf 4.1.1.tar.gz
 cd 4.1.1
 whereis phpize #查看phpize的位置
-/usr/local/php7/bin/phpize   #执行phpize文件生成configure配置文件，一定要在phpredis解压目录下执行
-./configure --with-php-config=/usr/local/php7/bin/php-config    #配置configure文件，注意php-config的位置
+/usr/local/webserver/php7/bin/phpize   #执行phpize文件生成configure配置文件，一定要在phpredis解压目录下执行
+./configure --with-php-config=/usr/local/webserver/php7/bin/php-config     #配置configure文件，注意php-config的位置
 make && make install    #编译安装（新增的扩展会在/usr/local/php7/lib/php/extensions/下）
 配置php.ini在extension后添加extension=redis.so， php.ini文件的位置可以通过php --ini来查看
 systemctl restart php-fpm   #重启php
 php -m #查看redis扩展是否添加成功
+
+如果使用phpize的时候出现报错 需要编译安装autoconf
+http://ftp.gnu.org/gnu/autoconf/autoconf-latest.tar.gz
 
 ## windows下为phpstudy安装phpredis扩展
 下载phpredis扩展https://windows.php.net/downloads/pecl/releases/redis/
@@ -42,3 +45,5 @@ php -m #查看redis扩展是否添加成功
 解压后得到php_redis.dll文件，复制到phpstudy下php/php7/ext目录下
 修改php.ini 添加extension=php_redis.dll
 重启phpstudy,再次查看phpinfo是否存在redis扩展
+
+其他的扩展也是同样的安装方法，比如mbstring（在php.ini里有;extension=mbstring 直接去掉前面分号就可以 也不用加.so后缀）

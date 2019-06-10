@@ -12,8 +12,9 @@ class BaseValidate extends Validate
     //检验参数
     public function goCheck()
     {
-        $request = Request::instance();
-        $params = $request->param();
+        // $request = Request::instance();
+        // $params = $request->param();
+        $params = Request::param(true); // 获取当前请求的所有变量（包含上传文件）
         $result = $this->check($params);
         if (!$result) {
             $error = $this->error;

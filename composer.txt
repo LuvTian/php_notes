@@ -1,4 +1,6 @@
-��linux�°�װcomposer����ǰ��Ŀ
+在linux下安装composer到当前项目
 curl -sS https://getcomposer.org/installer | php
 php composer.phar -V
 php composer.phar require "overtrue/wechat:~4.0" -vvv
+
+修改中国服务镜像composer config repo.packagist composer https://packagist.phpcomposer.com

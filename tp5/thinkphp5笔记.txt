@@ -55,3 +55,6 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 
 14.tp5模型类可以调用Db的所有方法
 15.大批量插入数据使用Db类的insertAll()方法，生成insert into `table_name` (field1,field2) values ('1','2'),('3','4'),('5','6')... 这样的sql语句
+
+16.hasWhere不能和withJoin一起使用，可以和with一起使用
+withJoin是join

@@ -160,12 +160,22 @@ while($row=$result->fetch_assoc()){
 php.ini里有以下个几个配置会影响，最重要的是后3个
 file_uploads 是否允许上传文件
 upload_tmp_dir 上传文件放置的临时目录
-max_execution_time 上传超时时间 默认超过30没有上传完就报错 0表示不限制
+max_execution_time 请求超时时间 默认超过30没有上传完就报错 0表示不限制
 post_max_size POST数据允许的大小
 upload_max_filesize 允许上传的文件最大大小
 
 另外nginx也会限制POST数据大小，超过后会报413错误
 在虚拟主机配置文件的server里加上client_max_body_size=20m
+
+关于超时的相关配置
+php.ini 
+max_execution_time
+前端ajax请求默认也有请求超时时间，超时未得到响应数据请求状态就会出现canceled，axios可以配置timeout参数
+
+fastcgi_connect_timeout 1200s; #同 FastCGI 服务器的连接超时时间，默认值60秒，它不能超过75秒；
+fastcgi_send_timeout 1200s; #Nginx 进程向 FastCGI 进程发送 request ，整个过程的超时时间，默认值60秒；
+fastcgi_read_timeout 1200s; #FastCGI  进程向  Nginx  进程发送 response ，整个过程的超时时间，默认值60秒；
+
 
 
 

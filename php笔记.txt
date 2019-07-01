@@ -175,6 +175,7 @@ max_execution_time
 fastcgi_connect_timeout 1200s; #同 FastCGI 服务器的连接超时时间，默认值60秒，它不能超过75秒；
 fastcgi_send_timeout 1200s; #Nginx 进程向 FastCGI 进程发送 request ，整个过程的超时时间，默认值60秒；
 fastcgi_read_timeout 1200s; #FastCGI  进程向  Nginx  进程发送 response ，整个过程的超时时间，默认值60秒；
+出现 504 Gateway Time-out就是这里原因
 
 
 

@@ -156,8 +156,16 @@ while($row=$result->fetch_assoc()){
 
 31.在命令行执行php -m 可以检测php加载的扩展
 
+32.影响文件上传的配置
+php.ini里有以下个几个配置会影响，最重要的是后3个
+file_uploads 是否允许上传文件
+upload_tmp_dir 上传文件放置的临时目录
+max_execution_time 上传超时时间 默认超过30没有上传完就报错 0表示不限制
+post_max_size POST数据允许的大小
+upload_max_filesize 允许上传的文件最大大小
 
-
+另外nginx也会限制POST数据大小，超过后会报413错误
+在虚拟主机配置文件的server里加上client_max_body_size=20m
 
 
 

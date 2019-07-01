@@ -1,0 +1,30 @@
+方案一：用子查询查询出重复的记录(id是最大的)，然后删除这些id的记录，保留id最小的一条为唯一数据，这种方案子查询效率很低，不推荐
+SELECT id
+FROM lawyeroa_original_customer
+WHERE customer_phone IN (
+		SELECT customer_phone
+		FROM lawyeroa_original_customer
+		GROUP BY customer_phone
+		HAVING COUNT(customer_phone) > 1
+	)
+	AND id NOT IN (
+		SELECT MIN(id) AS id
+		FROM lawyeroa_original_customer
+		GROUP BY customer_phone
+		HAVING COUNT(customer_phone) > 1
+	)
+
+方案二：用DISTINCT查询出去重后的数据（去重的字段必须加KEY索引，否则会报错），然后使用delete from where id not in () 来删除重复的数据，这种效率高很多
+select id,count(distinct customer_phone) from lawyeroa_original_customer group by customer_phone
+
+方案三：
+先建立一个同样字段的新表newtable，给指定需要去重的字段设置好unique约束
+使用如下INSERT IGNORE语句将旧表的数据全部转移到新表，由于使用了IGNORE选项这样遇到重复数据会忽略，直到将所有数据插入完成
+INSERT IGNORE INTO newtable SELECT * FROM oldtable;
+然后判断插入完成 删除oldtable：DROP TABLE `oldtable`
+然后重命名newtable为之前的表名
+
+
+参考：
+https://www.v2ex.com/t/432832
+https://www.cnblogs.com/sunss/archive/2010/10/23/1858874.html

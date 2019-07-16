@@ -1,5 +1,9 @@
-SQLSTATE[HY000] [2002] No such file or directory
+## SQLSTATE[HY000] [2002] No such file or directory
 
 1.mysql端口是否配置正确
 
 2.hostname是127.0.0.1 不是localhost
+
+
+## SQLSTATE[HY000]: General error: 1390 Prepared statement contains too many placeholders
+当写入大量数据的时候容易出现这个错误，出现的原因是PDO支持最大占位符为65535，如果写入数据为m列（即数据表的列数），n行。m*n必须大于65535 就会报错

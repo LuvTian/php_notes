@@ -24,6 +24,9 @@ INSERT IGNORE INTO newtable SELECT * FROM oldtable;
 然后判断插入完成 删除oldtable：DROP TABLE `oldtable`
 然后重命名newtable为之前的表名
 
+方案四：触发器 触发器不能用于自身
+方案五：建立视图view VIEW本质是sql语句
+打开的时候相当于调用了SQL语句
 
 参考：
 https://www.v2ex.com/t/432832

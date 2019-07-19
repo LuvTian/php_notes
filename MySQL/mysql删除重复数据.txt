@@ -24,9 +24,13 @@ INSERT IGNORE INTO newtable SELECT * FROM oldtable;
 然后判断插入完成 删除oldtable：DROP TABLE `oldtable`
 然后重命名newtable为之前的表名
 
-方案四：触发器 触发器不能用于自身
-方案五：建立视图view VIEW本质是sql语句
+方案四：Alter ignore table 表名 add  UNIQUE index 索引名 (字段1,字段2)
+它会删除重复的记录（会保留一条），然后建立唯一索引
+
+方案五：触发器 触发器不能用于自身
+方案六：建立视图view VIEW本质是sql语句
 打开的时候相当于调用了SQL语句
+
 
 参考：
 https://www.v2ex.com/t/432832

@@ -1,0 +1,5 @@
+联合唯一索引：多对多关联的中间表一般都要加联合唯一索引
+ALTER TABLE 表名 ADD UNIQUE index 索引名 (字段1,字段2)
+
+普通索引：
+ALTER TABLE 表名 ADD INDEX 索引名 ( 字段 )

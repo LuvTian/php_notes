@@ -1,0 +1,11 @@
+insert into、insert ignore into和replace into区别
+当表存在unique索引的时候：
+insert into 遇到重复的值 会直接报错'Duplicate entry ...' 并终止后面的数据的插入
+
+insert ignore into 遇到重复的值，会忽略当前插入的这条重复的值，保留数据库里的那条记录，继续插入后面的数据，不会报错
+
+replace into 遇到重复的值会把数据库里的那条重复记录删除，然后添加新的记录，可以理解为把重复的记录给替换了
+
+insert ignore into和replace into都会自增ID，会造成ID不连续
+
+MySQL如何在INSERT IGNORE未新增记录时避免AUTO_INCREMENT自增：设置innodb_autoinc_lock_mode参数

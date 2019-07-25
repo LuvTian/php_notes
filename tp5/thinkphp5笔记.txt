@@ -57,4 +57,11 @@ Route::post('api/gettoken/user','express_admin_api/Token/getToken')
 15.大批量插入数据使用Db类的insertAll()方法，生成insert into `table_name` (field1,field2) values ('1','2'),('3','4'),('5','6')... 这样的sql语句
 
 16.hasWhere不能和withJoin一起使用，可以和with一起使用
-withJoin是join
+with不是join方式查询 withJoin是join方式查询  视图查询是高级的join
+
+17.关联查询尽量用with方法，不用join方法。with查询有两次查询
+但是一对一关联要用withJoin方法（对于一对一关联来说，如果使用JOIN方式只有一次查询）
+withJoin默认是inner join 要使用left join设置withJoin的第二个参数
+with和withJoin都可以闭包查询，但withJoin闭包函数里面不能使用field属性可以使用withField
+
+一对多关联使用with的时候，在闭包函数里用$query->field指定字段的时候要加上关联键

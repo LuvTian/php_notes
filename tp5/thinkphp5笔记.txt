@@ -65,3 +65,6 @@ withJoin默认是inner join 要使用left join设置withJoin的第二个参数
 with和withJoin都可以闭包查询，但withJoin闭包函数里面不能使用field属性可以使用withField
 
 一对多关联使用with的时候，在闭包函数里用$query->field指定字段的时候要加上关联键
+
+18.tp5访问public文件下的静态资源文件如果出现404或者路由不匹配的报错：
+排查nginx虚拟主机配置文件是否配置正确，尝试修改public文件的权限

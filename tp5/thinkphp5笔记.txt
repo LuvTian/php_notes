@@ -75,3 +75,4 @@ with和withJoin都可以闭包查询，但withJoin闭包函数里面不能使用
 20.目录权限
 runtime目录权限为777
 uploads上传目录权限为755
+安全性：1.tp的入口文件要设置到public目录，这样就访问不到runtime目录。 2.开启强制路由。 3.runtime目录的所有者设置为www chown -R www:www runtime，可以通过ps aux|grep nginx来查看用户。

@@ -4,6 +4,12 @@
 
 2.hostname是127.0.0.1 不是localhost
 
+## 远程连接出现ERROR 2003 (HY000): Can't connect to MySQL server on **
+1.远程用户没有权限
+2.Linux防火墙没有允许mysql端口或端口号不正确，用 telnet 服务端ip 3306 命令可以查看端口是否通，如果不通检查防火墙和ecs安全组规则，或者用http://tool.chinaz.com/port/ 来扫描此端口
+3.mysql服务没有开启
+4.my.cnf中设置了bind-address=127.0.0.1 注释掉或者修改bind-address=0.0.0.0
+5.还可以尝试用ssh方式远程连接mysql
 
 ## SQLSTATE[HY000]: General error: 1390 Prepared statement contains too many placeholders
 当写入大量数据的时候容易出现这个错误，出现的原因是PDO支持最大占位符为65535，如果写入数据为m列（即数据表的列数），n行。m*n必须大于65535 就会报错

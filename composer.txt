@@ -1,6 +1,7 @@
-在linux下安装composer到当前项目
-curl -sS https://getcomposer.org/installer | php
+在linux/macos下安装composer到当前项目
+curl -sS https://getcomposer.org/installer | php #只在当前目录下可以使用
 
+使用：
 php composer.phar -V
 php composer.phar require "overtrue/wechat:~4.0" -vvv
 
@@ -8,6 +9,6 @@ php composer.phar require "overtrue/wechat:~4.0" -vvv
 
 
 mac安装
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/bin/composer
+curl -sS https://getcomposer.org/installer | php #只在当前目录下可以使用
+sudo mv composer.phar /usr/bin/composer #全局可以使用
 composer -V 

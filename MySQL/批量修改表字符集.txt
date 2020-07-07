@@ -1,0 +1,13 @@
+查看所有表的信息，其中包括COLLATE
+SHOW TABLE STATUS FROM 数据库名 LIKE '表前缀_%';
+
+生成批量修改的SQL语句：
+SELECT 
+CONCAT("ALTER TABLE `", TABLE_NAME,"` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;") 
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_SCHEMA="数据库名"
+AND TABLE_TYPE="BASE TABLE"
+
+生成的语句：ALTER TABLE `lawyeroa_sys_users` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+select concat可以用来拼接生成语句

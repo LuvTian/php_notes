@@ -18,6 +18,10 @@ composer -V
 
 升级composer
 composer self-update
+升级出现报错 rename(/Users/rehack/.composer/cache/composer-temp.phar,/usr/local/bin/composer): Permission denied  解决：
+chmod 755 ~/.composer/cache/composer-temp.phar
+sudo mv ~/.composer/cache/composer-temp.phar /usr/local/bin/composer
+
 清除缓存
 composer clear
 诊断命令
@@ -36,3 +40,5 @@ composer config -g --unset repos.packagist 取消配置
 在root    ALL=(ALL)   ALL这一行下面添加一行 rehack  ALL=(ALL)   ALL
 撤销sudoers文件写权限命令:chmod u-w /etc/sudoers
 
+
+sudo mv composer-temp.phar /usr/local/bin/composer

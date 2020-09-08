@@ -1,3 +1,5 @@
 1. SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'create_time' in where clause is ambiguous
 原因是withJoin的关联模型里存在和主模型相同的字段create_time
 withJoin(['developer'=>['realname'],'custype'=>['type_name']])
+
+2.不能使用json_encode来返回由toArray方法将模型实例转换的数组，当开启了调试模式，在小程序里json_encode会把Trace信息也返回到前端，造成数据错误

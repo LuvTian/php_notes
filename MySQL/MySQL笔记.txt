@@ -321,3 +321,24 @@ where 条件 group by 字段
 having 集合判断,用having的时候 group by要放在having的前面
 
 ----------------------------------------------------------------------------
+mysql5/MariaDB开启Binlog功能
+查看是否已经开启： show variables like '%log_bin%';或者show global variables like 'log_bin'; ON已开启 OFF未开启
+Linux开启方法：
+查看MySQL配置文件位置： locate my.cnf
+修改配置文件： vim /etc/my.cnf.d/server.cnf
+在 [mysqld] 下加入：
+log_bin                   = /var/lib/mysql/bin-log            #Binlog存放日志的位置
+log_bin_index             = /var/lib/mysql/mysql-bin.index    #指定索引文件的位置
+expire_logs_days          = 7                                 #删除超出这个变量保留期之前的全部日志被删除
+server_id                 = 0002                              #指定一个集群内的MySQL服务器ID，如果做数据库集群那么必须全局唯一，一般来说不推荐指定server_id等于1
+binlog_format             = ROW                               #Binlog 的日志模式
+
+重启MySQL：service mysql restart
+再次验证是否开启binlog: show binary logs;show variables like '%log_bin%';show variables like '%binlog%';
+开启后会在var/lib/mysq目录下产生mysql-bin.index(二进制日志索引文件)和bin-log.00000*(二进制日志文件)文件
+参考：https://blog.csdn.net/lengyue1084/article/details/103591642
+
+binlog常用命令
+mysql> show binary logs;  #获取binlog文件列表
+mysql> show binlog events;   #只查看第一个binlog文件的内容
+mysql> show binlog events in 'bin-log.000001';#查看指定binlog文件的内容

@@ -1,0 +1,4 @@
+select * from global_name; --显示当前数据库的全称
+select * from session_privs; --查看当前用户所拥有的全部权限
+select * from user_users;    --查看当前用户
+select * from all_users;  --查看所有用户
